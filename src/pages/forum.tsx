@@ -2307,15 +2307,45 @@ export default function Forum(): ReactNode {
                             )}
                           </>
                         ) : (
+                        <>
+                          {renderSummaryLeadBlock(detail.summaryLeadTop, {
+                            activityKey: detail.activityKey,
+                          })}
+                          {renderSummaryLeadBlock(detail.summaryLead, {
+                            activityKey: detail.activityKey,
+                          })}
                         <div className={styles.agenda}>
                           {sessionsByDay.map((section) => {
                             const isPlainOnlySection = section.sessions.every(
                               (session) => !(session.start && session.end)
                             );
+                            const forceCardListView = detail.activityKey === "power-workshop";
                             const isDeveloperLogoCardView =
                               detail.activityKey === "developer-conference";
                             const isMainForumPhaseView =
                               detail.activityKey === "main-forum" && isPlainOnlySection;
+                            const powerWorkshopPhases = forceCardListView
+                              ? section.sessions.reduce<
+                                  Array<{ key: string; title: string; items: ActivitySession[] }>
+                                >((phases, session) => {
+                                  const phaseTitle = session.sessionType
+                                    ? getAgendaText(session.sessionType, isZh)
+                                    : (isZh ? "议程" : "Agenda");
+                                  const existed = phases.find((phase) => phase.title === phaseTitle);
+
+                                  if (existed) {
+                                    existed.items.push(session);
+                                  } else {
+                                    phases.push({
+                                      key: `phase-${session.id}`,
+                                      title: phaseTitle,
+                                      items: [session],
+                                    });
+                                  }
+
+                                  return phases;
+                                }, [])
+                              : [];
 
                             const mainForumPhases = isMainForumPhaseView
                               ? section.sessions.reduce<
@@ -2375,8 +2405,15 @@ export default function Forum(): ReactNode {
                                               const isKeynoteSession =
                                                 session.sessionType?.zh === "主旨报告" ||
                                                 session.sessionType?.en === "Keynote";
+                                              const isGuestRemarksSession =
+                                                session.sessionType?.zh === "嘉宾致辞" ||
+                                                session.sessionType?.en === "Guest Remarks";
                                               const speakerPhotoSrc =
                                                 keynoteSpeakerPhotoBySessionId[session.id];
+                                              const sessionTitleText = getAgendaText(session.title, isZh).trim();
+                                              const sessionSpeakerText = session.speakers
+                                                ? getAgendaText(session.speakers, isZh).trim()
+                                                : "";
 
                                               return (
                                                 <div
@@ -2384,6 +2421,7 @@ export default function Forum(): ReactNode {
                                                   className={clsx(
                                                     styles.agendaItem,
                                                     styles.agendaKeynoteCard,
+                                                    isGuestRemarksSession && styles.agendaGuestRemarkCard,
                                                     session.talkTitle && styles.agendaItemHasTalkTitle
                                                   )}
                                                 >
@@ -2420,15 +2458,30 @@ export default function Forum(): ReactNode {
                                                       </div>
                                                     )}
                                                   <div className={styles.agendaKeynoteCardMain}>
-                                                      <div className={styles.agendaTitle}>
-                                                        {getAgendaText(session.title, isZh)}
-                                                      </div>
+                                                      {isGuestRemarksSession ? (
+                                                        <div className={styles.agendaGuestRemarkLine}>
+                                                          {sessionTitleText && (
+                                                            <span className={styles.agendaGuestRemarkName}>
+                                                              {sessionTitleText}
+                                                            </span>
+                                                          )}
+                                                          {sessionSpeakerText && (
+                                                            <span className={styles.agendaGuestRemarkRole}>
+                                                              {sessionSpeakerText}
+                                                            </span>
+                                                          )}
+                                                        </div>
+                                                      ) : (
+                                                        <div className={styles.agendaTitle}>
+                                                          {sessionTitleText}
+                                                        </div>
+                                                      )}
                                                       {session.note && (
                                                         <div className={styles.agendaNote}>
                                                           {getAgendaText(session.note, isZh)}
                                                         </div>
                                                       )}
-                                                      {session.speakers && (
+                                                      {session.speakers && !isGuestRemarksSession && (
                                                         <div className={styles.agendaNote}>
                                                           {getAgendaText(session.speakers, isZh)}
                                                         </div>
@@ -2456,6 +2509,65 @@ export default function Forum(): ReactNode {
                                       </div>
                                     ))}
                                   </div>
+                                ) : forceCardListView ? (
+                                  <div className={styles.agendaPartsCard}>
+                                    {powerWorkshopPhases.map((phase) => (
+                                      <section key={phase.key} className={styles.agendaPartSection}>
+                                        <div className={styles.agendaPartHeading}>{phase.title}</div>
+                                        <div className={styles.agendaPartList}>
+                                          {phase.items.map((session) => {
+                                            const sessionDisplayTitle = getSessionDisplayTitle(
+                                              detail.activityKey,
+                                              session
+                                            ).trim();
+
+                                            return (
+                                              <article key={session.id} className={styles.agendaPartItem}>
+                                                {session.talkTitle && (
+                                                  <div className={styles.agendaPartReportTitle}>
+                                                    {getAgendaText(session.talkTitle, isZh)}
+                                                  </div>
+                                                )}
+                                                {session.note && (
+                                                  <div
+                                                    className={clsx(
+                                                      styles.agendaNote,
+                                                      styles.agendaPartIntro
+                                                    )}
+                                                  >
+                                                    {getAgendaText(session.note, isZh)}
+                                                  </div>
+                                                )}
+                                                {sessionDisplayTitle && (
+                                                  <div
+                                                    className={clsx(
+                                                      styles.agendaTitle,
+                                                      styles.agendaPartSpeakerTitle
+                                                    )}
+                                                  >
+                                                    {sessionDisplayTitle}
+                                                  </div>
+                                                )}
+                                                {session.speakers && (
+                                                  <div className={styles.agendaNote}>
+                                                    {getAgendaText(session.speakers, isZh)}
+                                                  </div>
+                                                )}
+                                                {session.moderator && (
+                                                  <div className={styles.agendaNote}>
+                                                    {moderatorPrefix}
+                                                    {renderPersonNameWithBold(
+                                                      getAgendaText(session.moderator, isZh)
+                                                    )}
+                                                  </div>
+                                                )}
+                                              </article>
+                                            );
+                                          })}
+                                        </div>
+                                      </section>
+                                    ))}
+                                  </div>
                                 ) : (
                                   <div
                                     className={clsx(
@@ -2465,10 +2577,11 @@ export default function Forum(): ReactNode {
                                   >
                                     {section.sessions.map((session, sessionIndex) => {
                                       const hasSessionTime = Boolean(session.start && session.end);
+                                      const usePlainItem = !hasSessionTime;
                                       const prevSession =
                                         sessionIndex > 0 ? section.sessions[sessionIndex - 1] : null;
                                       const sameSessionTypeAsPrevPlain =
-                                        !hasSessionTime &&
+                                        usePlainItem &&
                                         Boolean(session.sessionType) &&
                                         Boolean(
                                           prevSession && !(prevSession.start && prevSession.end)
@@ -2496,7 +2609,7 @@ export default function Forum(): ReactNode {
                                           key={session.id}
                                           className={clsx(
                                             styles.agendaItem,
-                                            !hasSessionTime && styles.agendaItemPlain,
+                                            usePlainItem && styles.agendaItemPlain,
                                             showSpeakerPhotoSlot && styles.agendaItemSpeaker,
                                             session.talkTitle && styles.agendaItemHasTalkTitle
                                           )}
@@ -2566,6 +2679,7 @@ export default function Forum(): ReactNode {
                             );
                           })}
                         </div>
+                        </>
                         )}
                       </div>
                     )}

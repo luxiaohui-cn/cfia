@@ -1407,6 +1407,11 @@
 }
 
 .agendaPanelBody {
+  --forum-agenda-fs-title: 0.98rem;
+  --forum-agenda-fs-body: 0.9rem;
+  --forum-agenda-fs-meta: 0.78rem;
+  --forum-agenda-lh-title: 1.34;
+  --forum-agenda-lh-body: 1.55;
   border-top: 1px solid #edf2f8;
   padding: 1rem 1.1rem 1.15rem;
   display: grid;
@@ -1418,8 +1423,9 @@
   border: 1px solid #e6edf5;
   background: #f8fafd;
   padding: 0.75rem 0.85rem;
+  font-size: var(--forum-agenda-fs-body);
   color: #4d6070;
-  line-height: 1.65;
+  line-height: var(--forum-agenda-lh-body);
 }
 
 .agendaPanelSummaryLead {
@@ -1435,11 +1441,12 @@
 
 .agendaPanelSummaryLeadLabel {
   font-weight: 700;
+  font-size: calc(var(--forum-agenda-fs-body) + 0.01rem);
   color: #334155;
 }
 
 .agendaPanelSummaryLeadHead {
-  line-height: 1.4;
+  line-height: var(--forum-agenda-lh-body);
 }
 
 .agendaPanelSummaryLeadList {
@@ -1450,13 +1457,13 @@
 }
 
 .agendaPanelSummaryLeadItem {
-  line-height: 1.6;
+  line-height: var(--forum-agenda-lh-body);
 }
 
 .agendaPanelSummaryNote {
   color: #5a6775;
-  font-size: 0.92rem;
-  line-height: 1.5;
+  font-size: var(--forum-agenda-fs-meta);
+  line-height: 1.45;
 }
 
 .agendaPanelDayHeader {
@@ -1487,7 +1494,7 @@
 .sessionTime {
   font-weight: 700;
   color: #334155;
-  font-size: 0.86rem;
+  font-size: calc(var(--forum-agenda-fs-meta) + 0.02rem);
 }
 
 .sessionTypeTag {
@@ -1497,7 +1504,7 @@
   border-radius: 999px;
   background: #eef4fb;
   color: #35516b;
-  font-size: 0.76rem;
+  font-size: var(--forum-agenda-fs-meta);
   font-weight: 700;
 }
 
@@ -2112,6 +2119,61 @@
   gap: 0;
 }
 
+.agendaPartsCard {
+  border: 1px solid #e6edf5;
+  border-radius: 12px;
+  background: #f8fafd;
+  overflow: hidden;
+}
+
+.agendaPartSection {
+  padding: 0.78rem 0.95rem;
+}
+
+.agendaPartSection + .agendaPartSection {
+  border-top: 1px solid #dfe7f2;
+}
+
+.agendaPartHeading {
+  font-size: var(--forum-agenda-fs-title);
+  font-weight: 700;
+  line-height: var(--forum-agenda-lh-title);
+  color: #1f2f3d;
+  margin-bottom: 0.45rem;
+}
+
+.agendaPartList {
+  display: grid;
+}
+
+.agendaPartItem {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.48rem 0;
+}
+
+.agendaPartReportTitle {
+  font-size: var(--forum-agenda-fs-title);
+  font-weight: 600;
+  line-height: var(--forum-agenda-lh-title);
+  color: #334155;
+}
+
+.agendaPartIntro {
+  font-size: calc(var(--forum-agenda-fs-body) - 0.05rem);
+  line-height: var(--forum-agenda-lh-body);
+  font-style: italic;
+}
+
+.agendaPartItem .agendaPartSpeakerTitle {
+  font-size: calc(var(--forum-agenda-fs-title) - 0.08rem);
+  line-height: var(--forum-agenda-lh-body);
+}
+
+.agendaPartItem + .agendaPartItem {
+  border-top: 1px solid #e5ecf5;
+}
+
 .agendaPhaseList {
   display: grid;
   gap: 0;
@@ -2130,15 +2192,16 @@
 }
 
 .agendaPhaseTitle {
-  font-size: 1.08rem;
+  font-size: calc(var(--forum-agenda-fs-title) + 0.04rem);
   font-weight: 700;
   color: #1a2a33;
-  line-height: 1.35;
+  line-height: var(--forum-agenda-lh-title);
 }
 
 .agendaPhaseLead {
+  font-size: var(--forum-agenda-fs-body);
   color: #4d6070;
-  line-height: 1.55;
+  line-height: var(--forum-agenda-lh-body);
   padding: 0.05rem 0.1rem 0.6rem;
   margin-bottom: 0.2rem;
   border-bottom: 1px solid #edf2f8;
@@ -2188,12 +2251,14 @@
 }
 
 .agendaItemPlain .agendaTitle {
-  font-size: 0.98rem;
-  font-weight: 600;
+  font-size: var(--forum-agenda-fs-title);
+  font-weight: 650;
+  line-height: var(--forum-agenda-lh-title);
 }
 
 .agendaItemPlain .agendaNote {
-  line-height: 1.5;
+  font-size: var(--forum-agenda-fs-body);
+  line-height: var(--forum-agenda-lh-body);
 }
 
 .agendaItemHasTalkTitle {
@@ -2207,25 +2272,25 @@
 }
 
 .agendaTalkTitleZh {
-  font-size: 0.95rem;
-  line-height: 1.28;
-  font-weight: 700;
+  font-size: calc(var(--forum-agenda-fs-title) - 0.03rem);
+  line-height: 1.32;
+  font-weight: 600;
   color: #334155;
   letter-spacing: 0.005em;
 }
 
 .agendaTalkTitleEn {
-  font-size: 0.82rem;
-  line-height: 1.38;
+  font-size: calc(var(--forum-agenda-fs-body) - 0.06rem);
+  line-height: 1.4;
   font-weight: 600;
   color: #5c6b7b;
 }
 
 .agendaItemHasTalkTitle .agendaTitle {
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: var(--forum-agenda-fs-title);
+  font-weight: 650;
   color: #334155;
-  line-height: 1.28;
+  line-height: var(--forum-agenda-lh-title);
   margin-top: 0;
 }
 
@@ -2282,9 +2347,24 @@
 }
 
 .agendaKeynoteCard .agendaNote {
-  font-size: 0.82rem;
-  line-height: 1.38;
+  font-size: var(--forum-agenda-fs-body);
+  line-height: var(--forum-agenda-lh-body);
   color: #5c6b7b;
+}
+
+.agendaKeynoteCard.agendaGuestRemarkCard {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  gap: 0.34rem;
+}
+
+.agendaGuestRemarkCard .agendaKeynoteCardMain {
+  min-height: 0;
+  gap: 0.8rem;
+}
+
+.agendaGuestRemarkCard .agendaGuestRemarkLine {
+  gap: 0.5rem;
 }
 
 .agendaPhaseItem {
@@ -2345,12 +2425,35 @@
 }
 
 .agendaTitle {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--forum-agenda-fs-title);
+  font-weight: 650;
+  line-height: var(--forum-agenda-lh-title);
+}
+
+.agendaGuestRemarkLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.65rem;
+  line-height: var(--forum-agenda-lh-title);
+}
+
+.agendaGuestRemarkName {
+  font-size: var(--forum-agenda-fs-title);
+  font-weight: 650;
+  color: #1f2f3d;
+}
+
+.agendaGuestRemarkRole {
+  font-size: var(--forum-agenda-fs-title);
+  font-weight: 400;
+  color: #4d6070;
 }
 
 .agendaNote {
   color: #4d6070;
+  font-size: var(--forum-agenda-fs-body);
+  line-height: var(--forum-agenda-lh-body);
 }
 
 .devAgendaList {
@@ -2947,6 +3050,16 @@
 [data-theme='dark'] .personTitle,
 [data-theme='dark'] .logoPlaceholder {
   color: #b8c7d9;
+}
+
+[data-theme='dark'] .agendaPartsCard {
+  background: rgba(216, 227, 242, 0.04);
+  border-color: rgba(216, 227, 242, 0.14);
+}
+
+[data-theme='dark'] .agendaPartSection + .agendaPartSection,
+[data-theme='dark'] .agendaPartItem + .agendaPartItem {
+  border-top-color: rgba(216, 227, 242, 0.14);
 }
 
 [data-theme='dark'] .agendaPanelMetaTag {
@@ -4424,6 +4537,18 @@
     padding: 0.65rem 0.75rem;
     border-radius: 10px;
     gap: 0.28rem;
+  }
+
+  .agendaPartSection {
+    padding: 0.65rem 0.75rem;
+  }
+
+  .agendaPartHeading {
+    margin-bottom: 0.35rem;
+  }
+
+  .agendaPartItem {
+    padding: 0.42rem 0;
   }
 
   .agendaItemPlain {

@@ -221,6 +221,16 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         },
       },
       {
+        id: "mf-d2-remarks-xia",
+        day: "day2",
+        title: { zh: "夏祖义", en: "Zuyi Xia" },
+        sessionType: { zh: "嘉宾致辞", en: "Guest Remarks" },
+        speakers: {
+          zh: "中国环境科学学会副理事长兼秘书长、碳足迹专委会主任委员兼秘书长",
+          en: "Vice Chairman and Secretary-General, Chinese Society for Environmental Sciences; Chair and Secretary-General, Carbon Footprint Committee",
+        },
+      },
+      {
         id: "mf-d2-keynote-llorenc",
         day: "day2",
         title: { zh: "Llorenç Milà i Canals", en: "Llorenc Milà i Canals" },
@@ -286,6 +296,10 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         id: "mf-d2-keynote-naama",
         day: "day2",
         title: { zh: "Naama Avni-Kadosh", en: "Naama Avni-Kadosh" },
+        talkTitle: {
+          zh: "连接全球供应链碳数据：构建可信的产品碳数据基础设施",
+          en: "Connecting Carbon Data Across Global Supply Chains: Building a Trusted Infrastructure for Product Carbon Data",
+        },
         sessionType: { zh: "主旨报告", en: "Keynote" },
         speakers: {
           zh: "世界可持续发展工商理事会（WBCSD）碳透明伙伴关系（PACT）总监",
@@ -648,14 +662,118 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
       en: "Conveners:\nYing Zheng, Director, Dual-Carbon Business Division, Beijing Dianlian Technology Co., Ltd.; Invited Research Fellow, Tsinghua TianGong Think Tank Center\nZhuo Li, Program Manager, Clean Power Program, Energy Foundation China\nYushi Chen, Distinguished Research Fellow, TianGong Think Tank",
     },
     summary: {
-      zh: "电力与碳足迹分论坛将围绕电力碳足迹与电力系统碳排放议题，结合能源转型背景，邀请相关机构与企业代表进行分享与交流，讨论方法、数据与应用协同，推动电力碳数据体系建设与实践对接。",
-      en: "The Power and Carbon Footprint Sub-forum will focus on power carbon footprints and power-system carbon emissions in the context of the energy transition. Representatives from relevant institutions and enterprises will be invited to share practices and exchange views, discussing coordination across methods, data, and applications, and advancing the development and practical alignment of power carbon data systems.",
+      zh: "分论坛围绕电力系统脱碳与电力碳足迹核算展开，设置开场致辞、主旨发言、圆桌对话与总结环节，聚焦国际趋势、国内战略、方法标准与企业实践。",
+      en: "This sub-forum focuses on power-system decarbonization and power carbon-footprint accounting, with opening remarks, keynote speeches, roundtables, and closing remarks. Topics cover global trends, China strategy, methods and standards, and enterprise practice.",
     },
     dateLabel: { zh: "2026 年 3 月 26 日", en: "March 26, 2026" },
     timeRange: "Day 2 14:00-17:30",
     venue: { zh: "分论坛会场（待确认）", en: "Sub-forum Venue (TBC)" },
     language: "zh",
     status: "pending",
-    sessions: [],
+    sessions: [
+      {
+        id: "pw-opening-remarks",
+        day: "day2",
+        sessionType: { zh: "开场致辞", en: "Opening Remarks" },
+        title: { zh: "国网江苏电力公司", en: "State Grid Jiangsu Electric Power Company" },
+      },
+      {
+        id: "pw-keynote-patrick",
+        day: "day2",
+        sessionType: { zh: "主旨发言", en: "Keynote Speeches" },
+        title: {
+          zh: "Patrick McMaster（廖利财）｜IEA国际能源署能源效率中心中国项目主任",
+          en: "Patrick McMaster | China Program Director, Energy Efficiency Center, IEA",
+        },
+        talkTitle: {
+          zh: "全球能源转型背景下的电力系统脱碳进展与排放趋势",
+          en: "Progress and Emission Trends of Power-System Decarbonization under the Global Energy Transition",
+        },
+        note: {
+          zh: "从IEA视角介绍全球能源转型进展，并从电力切入梳理主要经济体电力结构与排放演变、电力排放因子变化（基于IEA年度数据）及地区差异。",
+          en: "From the IEA perspective, this talk reviews global energy-transition progress and, focusing on the power sector, maps the evolution of power mix and emissions in major economies, changes in electricity emission factors (based on IEA annual data), and regional differences.",
+        },
+      },
+      {
+        id: "pw-keynote-chai",
+        day: "day2",
+        sessionType: { zh: "主旨发言", en: "Keynote Speeches" },
+        title: {
+          zh: "柴麒敏｜国家气候战略中心战略规划部主任",
+          en: "Qimin Chai | Director, Strategic Planning Department, National Center for Climate Change Strategy and International Cooperation",
+        },
+        talkTitle: { zh: "我国当前的气候与能源战略", en: "China's Current Climate and Energy Strategy" },
+        note: {
+          zh: "从国内视角介绍我国当前的气候与能源战略。",
+          en: "An overview of China's current climate and energy strategy from a domestic perspective.",
+        },
+      },
+      {
+        id: "pw-keynote-zhang",
+        day: "day2",
+        sessionType: { zh: "主旨发言", en: "Keynote Speeches" },
+        title: {
+          zh: "张晶杰｜中电联规划发展部副主任",
+          en: "Jingjie Zhang | Deputy Director, Planning and Development Department, China Electricity Council",
+        },
+        talkTitle: {
+          zh: "中国电力碳足迹量化方法与标准体系建设",
+          en: "Quantification Methods and Standards-System Development for China's Power Carbon Footprint",
+        },
+        note: {
+          zh: "介绍我国电力低碳化发展成效，以及电力碳足迹工作的进展与展望。",
+          en: "Introduces China's progress in low-carbon power development and the current progress and outlook of power carbon-footprint work.",
+        },
+      },
+      {
+        id: "pw-keynote-sgcc",
+        day: "day2",
+        sessionType: { zh: "主旨发言", en: "Keynote Speeches" },
+        title: { zh: "国家电网公司", en: "State Grid Corporation of China" },
+        talkTitle: { zh: "电网碳足迹核算的思考", en: "Reflections on Carbon Footprint Accounting for Power Grids" },
+        note: {
+          zh: "从电网公司角度，介绍我国在电网排放因子/电力碳足迹方面的研究进展与实际应用。",
+          en: "From a grid-company perspective, this talk presents China's research progress and practical applications on grid emission factors and power carbon footprints.",
+        },
+      },
+      {
+        id: "pw-keynote-huang",
+        day: "day2",
+        sessionType: { zh: "主旨发言", en: "Keynote Speeches" },
+        title: { zh: "黄卓晖｜WRI China 副研究员", en: "Zhuohui Huang | Research Analyst, WRI China" },
+        talkTitle: {
+          zh: "国际标准发展对电力碳足迹核算的影响",
+          en: "Impacts of International Standards Development on Power Carbon Footprint Accounting",
+        },
+        note: {
+          zh: "围绕标准更新，以及GHG Protocol与ISO合作进展对电力碳足迹核算的影响作专题分享。",
+          en: "A focused sharing on standard updates, including how progress in GHG Protocol and ISO collaboration affects power carbon-footprint accounting.",
+        },
+      },
+      {
+        id: "pw-roundtable-1",
+        day: "day2",
+        sessionType: { zh: "圆桌对话（嘉宾后续更新）", en: "Roundtable (Guest lineup to be updated)" },
+        title: {
+          zh: "圆桌一：能源转型政策与国际合作",
+          en: "Roundtable 1: Energy-Transition Policy and International Cooperation",
+        },
+      },
+      {
+        id: "pw-roundtable-2",
+        day: "day2",
+        sessionType: { zh: "圆桌对话（嘉宾后续更新）", en: "Roundtable (Guest lineup to be updated)" },
+        title: {
+          zh: "圆桌二：企业电力脱碳路径与供应链低碳管理实践",
+          en: "Roundtable 2: Corporate Power-Decarbonization Pathways and Low-Carbon Supply-Chain Management Practice",
+        },
+      },
+      {
+        id: "pw-closing",
+        day: "day2",
+        sessionType: { zh: "总结", en: "Closing" },
+        title: { zh: "", en: "" },
+      },
+    ],
   },
 ];
