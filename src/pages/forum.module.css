@@ -597,7 +597,7 @@
   height: 100%;
   padding: 0.65rem 0.7rem;
   gap: 0.35rem;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 8px;
   border: 1px solid var(--agenda-event-border);
   border-left-color: var(--agenda-event-border);
@@ -605,7 +605,7 @@
   box-shadow: none;
   display: grid;
   grid-template-rows: auto 1fr;
-  align-content: stretch;
+  align-content: start;
   justify-items: stretch;
   text-align: left;
   gap: 0.2rem;
@@ -635,18 +635,20 @@
 }
 
 .masterCalendarEvent .masterTimelineItemTitle {
-  font-size: 0.88rem;
-  line-height: 1.22;
+  font-size: 0.84rem;
+  line-height: 1.2;
   color: #22303d;
-  text-align: center;
+  text-align: left;
   font-weight: 700;
-  align-self: center;
-  justify-self: center;
+  align-self: start;
+  justify-self: stretch;
   max-width: 100%;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  display: block;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: initial;
+  overflow: visible;
+  white-space: pre-line;
+  word-break: break-word;
   position: relative;
   z-index: 1;
 }
@@ -945,8 +947,8 @@
   min-width: 0;
   min-height: 0;
   display: grid;
-  padding-top: 0.22rem;
-  padding-bottom: 0.22rem;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .masterTrackMain {
@@ -2513,6 +2515,209 @@
   line-height: var(--forum-agenda-lh-body);
 }
 
+.devProgramTable {
+  border: 1px solid #dbe4ee;
+  border-radius: 12px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.devProgramGrid {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 3.45fr) minmax(0, 1.55fr);
+}
+
+.devProgramHeaderRow {
+  background: #f7faff;
+  border-bottom: 1px solid #dbe4ee;
+}
+
+.devProgramHeadCell {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #1f2f3d;
+  padding: 0.62rem 0.7rem;
+  border-right: 1px solid #dbe4ee;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.devProgramHeadCell:last-child {
+  border-right: 0;
+}
+
+.devProgramRow {
+  border-top: 1px solid #e6edf5;
+}
+
+.devProgramRowTinted {
+  background: #f5f9ff;
+}
+
+.devProgramRow:first-of-type {
+  border-top: 0;
+}
+
+.devProgramRowOpening {
+  background: #fcfdff;
+}
+
+.devProgramRowOpening.devProgramRowTinted {
+  background: #f5f9ff;
+}
+
+.devProgramTimeCell,
+.devProgramSessionCell,
+.devProgramSpeakerMetaCell {
+  min-width: 0;
+  padding: 0.62rem 0.7rem;
+  border-right: 1px solid #e6edf5;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: #1f2f3d;
+  white-space: normal;
+  word-break: break-word;
+  display: flex;
+  align-items: center;
+}
+
+.devProgramTimeCell {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.devProgramSessionMain {
+  display: grid;
+  grid-template-columns: 122px minmax(0, 1fr);
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.devProgramDesktopSession {
+  width: 100%;
+}
+
+.devProgramMobileSession {
+  display: none;
+}
+
+.devProgramLogoSlot {
+  height: 82px;
+  border-radius: 9px;
+  border: 1px solid #e3ebf5;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0.12rem 0.18rem;
+}
+
+.devProgramLogoImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.devProgramLogoFallback {
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #64748b;
+  text-align: center;
+}
+
+.devProgramSessionText {
+  min-width: 0;
+  display: grid;
+  gap: 0.14rem;
+}
+
+.devProgramSessionTitle {
+  font-size: 0.96rem;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #1f2f3d;
+}
+
+.devProgramSessionTitleEn {
+  font-size: 0.84rem;
+  line-height: 1.35;
+  color: #5c6b7b;
+}
+
+.devProgramSessionOrg {
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: #64748b;
+}
+
+.devProgramOpeningText {
+  font-size: 0.98rem;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #1f2f3d;
+}
+
+.devProgramSpeakerMetaCell {
+  border-right: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.16rem;
+}
+
+.devProgramSpeakerName {
+  font-weight: 700;
+  color: #1f2f3d;
+}
+
+.devProgramSpeakerRole {
+  color: #4d6070;
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.devProgramSectionRow {
+  background: #f8fafc;
+}
+
+.devProgramSectionRowNoTime {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.devProgramSectionRowNoTime .devProgramTimeCell {
+  display: none;
+}
+
+.devProgramSectionRowNoTime .devProgramSectionCell {
+  grid-column: 1 / -1;
+}
+
+.devProgramSectionRow .devProgramTimeCell {
+  font-weight: 800;
+  border-right: 0;
+}
+
+.devProgramTimeCellEmpty {
+  color: transparent;
+}
+
+.devProgramSectionCell {
+  grid-column: 2 / -1;
+  padding: 0.62rem 0.7rem;
+  font-size: 1rem;
+  line-height: 1.35;
+  font-weight: 800;
+  color: #111827;
+  display: flex;
+  align-items: center;
+}
+
 .devAgendaList {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -3573,6 +3778,57 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .devProgramGrid {
+    grid-template-columns: 120px minmax(0, 3.22fr) minmax(0, 1.43fr);
+  }
+
+  .devProgramHeadCell,
+  .devProgramTimeCell,
+  .devProgramSessionCell,
+  .devProgramSpeakerMetaCell,
+  .devProgramSectionCell {
+    padding: 0.56rem 0.58rem;
+  }
+
+  .devProgramHeadCell {
+    font-size: 0.84rem;
+  }
+
+  .devProgramTimeCell {
+    font-size: 0.92rem;
+  }
+
+  .devProgramSessionMain {
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 0.52rem;
+  }
+
+  .devProgramLogoSlot {
+    height: 72px;
+    border-radius: 8px;
+    padding: 0.1rem 0.16rem;
+  }
+
+  .devProgramSessionTitle {
+    font-size: 0.9rem;
+  }
+
+  .devProgramSessionTitleEn {
+    font-size: 0.78rem;
+  }
+
+  .devProgramOpeningText {
+    font-size: 0.9rem;
+  }
+
+  .devProgramSessionOrg {
+    font-size: 0.78rem;
+  }
+
+  .devProgramSpeakerRole {
+    font-size: 0.76rem;
+  }
+
   .devAgendaList {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.7rem;
@@ -3620,6 +3876,131 @@
 
   .timelineDateLabelShort {
     display: inline;
+  }
+
+  .devProgramHeaderRow {
+    display: none;
+  }
+
+  .devProgramGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .devProgramRow {
+    border-top-color: #d6e3f2;
+    background: #ffffff;
+  }
+
+  .devProgramRowTinted {
+    background: #f3f8ff;
+  }
+
+  .devProgramRowOpening.devProgramRowTinted {
+    background: #f3f8ff;
+  }
+
+  .devProgramTimeCell {
+    border-right: 0;
+    border-bottom: 1px solid #dbe7f4;
+    margin: 0;
+    padding: 0.38rem 0.52rem 0.4rem;
+    font-size: 0.8rem;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .devProgramSessionCell,
+  .devProgramSpeakerMetaCell {
+    border-right: 0;
+    padding: 0;
+    font-size: 0.84rem;
+    line-height: 1.4;
+  }
+
+  .devProgramSpeakerMetaCell {
+    display: none;
+  }
+
+  .devProgramDesktopSession {
+    display: none;
+  }
+
+  .devProgramMobileSession {
+    display: grid;
+    gap: 0;
+    width: 100%;
+  }
+
+  .devProgramMobileTop {
+    display: grid;
+    grid-template-columns: 86px minmax(0, 1fr);
+    gap: 0.44rem;
+    align-items: center;
+    padding: 0.42rem 0.52rem;
+    border: 0;
+    border-bottom: 1px solid #d8e7dd;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .devProgramMobileSpeaker {
+    min-width: 0;
+    display: grid;
+    gap: 0.14rem;
+  }
+
+  .devProgramMobileTitle {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0.52rem 0.52rem 0.42rem;
+  }
+
+  .devProgramMobileTitleOpening {
+    background: transparent;
+    padding-top: 0.42rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .devProgramLogoSlot {
+    height: 60px;
+    padding: 0.1rem 0.15rem;
+    border-radius: 0;
+  }
+
+  .devProgramSessionTitle {
+    font-size: 0.84rem;
+    line-height: 1.34;
+  }
+
+  .devProgramSessionTitleEn {
+    font-size: 0.74rem;
+  }
+
+  .devProgramOpeningText {
+    font-size: 0.84rem;
+  }
+
+  .devProgramSessionOrg {
+    font-size: 0.72rem;
+  }
+
+  .devProgramSectionRow {
+    grid-template-columns: 100px minmax(0, 1fr);
+  }
+
+  .devProgramSectionRow .devProgramTimeCell {
+    border-bottom: 0;
+    border-right: 0;
+    padding: 0.5rem 0.52rem;
+    font-size: 0.78rem;
+  }
+
+  .devProgramSectionCell {
+    grid-column: auto;
+    font-size: 0.86rem;
+    padding: 0.5rem 0.52rem;
   }
 
   .hero {
@@ -3896,8 +4277,8 @@
   }
 
   .masterCalendarStackedMobile .masterCalendarEventShell {
-    padding-top: 0.1rem;
-    padding-bottom: 0.1rem;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .masterCalendarStackedMobile .masterCalendarEvent {
@@ -3921,7 +4302,7 @@
 
   .masterCalendarStackedMobile .masterCalendarEvent .masterTimelineItemTop {
     gap: 0.22rem;
-    margin-bottom: 0.38rem;
+    margin-bottom: 0.18rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarEvent .masterTimelineItemTitle {
@@ -3936,8 +4317,8 @@
     align-self: start;
     justify-self: stretch;
     text-align: left;
-    margin-top: 0.1rem;
-    padding-top: 0.08rem;
+    margin-top: 0;
+    padding-top: 0;
   }
 
   .masterCalendarStackedMobile .masterCalendarPrepEvent {
@@ -4287,6 +4668,71 @@
     --forum-mobile-fs-detail-title: 0.96rem;
     --forum-mobile-fs-detail-meta: 0.76rem;
     --forum-mobile-fs-micro: 0.66rem;
+  }
+
+  .devProgramSectionRow {
+    grid-template-columns: 88px minmax(0, 1fr);
+  }
+
+  .devProgramTimeCell {
+    font-size: 0.74rem;
+    padding: 0.4rem 0.45rem;
+  }
+
+  .devProgramSessionCell,
+  .devProgramSpeakerMetaCell {
+    padding: 0.4rem 0.45rem;
+    font-size: 0.78rem;
+  }
+
+  .devProgramSectionCell {
+    font-size: 0.8rem;
+    padding: 0.42rem 0.45rem;
+  }
+
+  .devProgramSessionMain {
+    grid-template-columns: 74px minmax(0, 1fr);
+    gap: 0.38rem;
+  }
+
+  .devProgramLogoSlot {
+    height: 52px;
+    padding: 0.08rem 0.12rem;
+  }
+
+  .devProgramSessionTitle {
+    font-size: 0.78rem;
+  }
+
+  .devProgramSessionTitleEn {
+    font-size: 0.68rem;
+  }
+
+  .devProgramOpeningText {
+    font-size: 0.78rem;
+  }
+
+  .devProgramSessionOrg,
+  .devProgramLogoFallback {
+    font-size: 0.68rem;
+  }
+
+  .devProgramSpeakerRole {
+    font-size: 0.7rem;
+  }
+
+  .devProgramMobileTop {
+    grid-template-columns: 74px minmax(0, 1fr);
+    gap: 0.38rem;
+  }
+
+  .devProgramMobileSession {
+    gap: 0;
+  }
+
+  .devProgramMobileTitle {
+    padding-top: 0.48rem;
+    padding-bottom: 0.34rem;
   }
 
   .hero {
@@ -4879,8 +5325,8 @@
   }
 
   .masterCalendarStackedMobile .masterCalendarEventShell {
-    padding-top: 0.05rem;
-    padding-bottom: 0.05rem;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .masterCalendarStackedMobile .masterCalendarEvent {
@@ -4903,7 +5349,7 @@
 
   .masterCalendarStackedMobile .masterCalendarEvent .masterTimelineItemTop {
     gap: 0.15rem;
-    margin-bottom: 0.34rem;
+    margin-bottom: 0.16rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarEvent .masterTimelineItemTitle {
@@ -4918,8 +5364,8 @@
     align-self: start;
     justify-self: stretch;
     text-align: left;
-    margin-top: 0.08rem;
-    padding-top: 0.08rem;
+    margin-top: 0;
+    padding-top: 0;
   }
 
   .masterCalendarStackedMobile .masterCalendarPrepEvent {

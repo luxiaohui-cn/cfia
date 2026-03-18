@@ -621,6 +621,11 @@ const devConfLogos: { key: string; name: string; src?: string }[] = [
     src: "img/tg-forum/orgnizations/lca_dev_conf/dds.png",
   },
   {
+    key: "cornerstone",
+    name: "Cornerstone",
+    src: "img/tg-forum/orgnizations/lca_dev_conf/cornerstone.png",
+  },
+  {
     key: "ecoinvent",
     name: "ecoinvent",
     src: "img/tg-forum/orgnizations/lca_dev_conf/ecoinvent.png",
@@ -659,6 +664,16 @@ const devConfLogos: { key: string; name: string; src?: string }[] = [
     key: "watershed",
     name: "Watershed",
     src: "img/tg-forum/orgnizations/lca_dev_conf/watershed.png",
+  },
+  {
+    key: "sues",
+    name: "Shanghai University of Engineering Science",
+    src: "img/tg-forum/orgnizations/lca_dev_conf/sues.jpg",
+  },
+  {
+    key: "wbcsd",
+    name: "WBCSD",
+    src: "img/tg-forum/orgnizations/lca_dev_conf/wbcsd.jpg",
   },
 ];
 
@@ -1457,7 +1472,7 @@ export default function Forum(): ReactNode {
 
   const getSessionDisplayTitle = (activityKey: string, session: ActivitySession): string => {
     if (activityKey === "main-forum" && session.id === "mf-d2-open") {
-      return isZh ? "领导致辞" : "Leadership Remarks";
+      return isZh ? "领导致辞" : "Remarks";
     }
 
     return getAgendaText(session.title, isZh);
@@ -1613,119 +1628,226 @@ export default function Forum(): ReactNode {
     );
   };
 
-  const renderDeveloperConferenceAgendaList = (sessions: ActivitySession[]): ReactNode => (
-    <div className={styles.devAgendaList}>
-      {sessions.map((session) => {
-        const logo = session.orgLogoKey ? devConfLogoByKey.get(session.orgLogoKey) : undefined;
-        const logoLabel =
-          session.sessionType
-            ? getAgendaText(session.sessionType, isZh)
-            : getAgendaText(session.title, isZh).slice(0, 8);
+  const renderDeveloperConferencePhaseList = (sessions: ActivitySession[]): ReactNode => {
+    const openingSession = sessions.find((session) => session.id === "dev-opening");
+    const coffeeBreakSession = sessions.find((session) => session.id === "dev-break");
+    const reportSessions = sessions
+      .filter((session) => session.sessionType?.zh === "报告" || session.sessionType?.en === "Talk")
+      .sort(sortSessions);
+    const sectionOneSessions = reportSessions.filter(
+      (session) => Boolean(session.start) && parseTimeToMinutes(session.start as string) < 15 * 60 + 35
+    );
+    const sectionTwoSessions = reportSessions.filter(
+      (session) => Boolean(session.start) && parseTimeToMinutes(session.start as string) >= 15 * 60 + 50
+    );
+    const stripedSessionIds = new Set<string>();
+    const orderedSessionRows = [
+      ...(openingSession ? [openingSession] : []),
+      ...sectionOneSessions,
+      ...sectionTwoSessions,
+    ];
+    orderedSessionRows.forEach((session, index) => {
+      if (index % 2 === 0) {
+        stripedSessionIds.add(session.id);
+      }
+    });
 
-        return (
-          <div key={session.id} className={styles.devAgendaCard}>
-            <div className={styles.devAgendaCardBody}>
-              <div
-                className={styles.devAgendaLogoSlot}
-                aria-hidden="true"
-              >
-                {logo?.src ? (
-                  <div className={styles.devAgendaLogoCanvas}>
-                    <img
-                      className={styles.devAgendaLogoMark}
-                      src={logo.src}
-                      alt={logo.name}
-                      loading="lazy"
-                    />
-                  </div>
-                ) : (
-                  <span className={styles.devAgendaLogoFallback}>
-                    {logoLabel || (isZh ? "环节" : "Session")}
-                  </span>
-                )}
-              </div>
+    const getSessionTimeRange = (session: ActivitySession): string => {
+      if (!session.start || !session.end) {
+        return "";
+      }
+      return `${session.start}-${session.end}`;
+    };
 
-              <div className={styles.devAgendaCardContent}>
-                {session.speakers && (
-                  <div className={styles.devAgendaCardName}>
-                    {getAgendaText(session.speakers, isZh)}
-                  </div>
-                )}
-                <div className={styles.devAgendaCardUnit}>
-                  {getAgendaText(session.title, isZh)}
+    const getSessionBlockRange = (items: ActivitySession[]): string => {
+      if (items.length === 0) {
+        return "";
+      }
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (!first.start || !last.end) {
+        return "";
+      }
+      return `${first.start}-${last.end}`;
+    };
+
+    const renderSessionLogo = (session: ActivitySession): ReactNode => {
+      const logo = session.orgLogoKey ? devConfLogoByKey.get(session.orgLogoKey) : undefined;
+      const logoFallbackText =
+        logo?.name ??
+        getAgendaText(session.title, isZh) ??
+        (isZh ? "机构" : "Org");
+
+      return (
+        <div className={styles.devProgramLogoSlot} aria-hidden="true">
+          {logo?.src ? (
+            <img
+              className={styles.devProgramLogoImage}
+              src={logo.src}
+              alt={logo.name}
+              loading="lazy"
+            />
+          ) : (
+            <span className={styles.devProgramLogoFallback}>{logoFallbackText}</span>
+          )}
+        </div>
+      );
+    };
+
+    const renderSessionRow = (
+      session: ActivitySession,
+      options?: { opening?: boolean; tinted?: boolean }
+    ): ReactNode => {
+      const talkTitleZh = session.talkTitle?.zh?.trim() ?? "";
+      const talkTitleEn = (session.talkTitle?.en ?? session.talkTitle?.zh ?? "").trim();
+      const hasTalkTitle = Boolean(talkTitleZh || talkTitleEn);
+      const organizationTitle = getAgendaText(session.title, isZh);
+      const sessionTitle = hasTalkTitle
+        ? (isZh ? (talkTitleZh || talkTitleEn) : (talkTitleEn || talkTitleZh))
+        : organizationTitle;
+      const showTalkTitleEn = isZh && Boolean(talkTitleEn && talkTitleEn !== (talkTitleZh || ""));
+      const speakerText = session.speakers
+        ? getAgendaText(session.speakers, isZh)
+        : (session.moderator ? getAgendaText(session.moderator, isZh) : "");
+      const affiliationText = session.note ? getAgendaText(session.note, isZh) : "";
+      const speakerMetaNode = (
+        <>
+          <div className={styles.devProgramSpeakerName}>{speakerText || "-"}</div>
+          {affiliationText && (
+            <div className={styles.devProgramSpeakerRole}>{affiliationText}</div>
+          )}
+        </>
+      );
+
+      return (
+        <div
+          key={session.id}
+          className={clsx(
+            styles.devProgramGrid,
+            styles.devProgramRow,
+            options?.tinted && styles.devProgramRowTinted,
+            options?.opening && styles.devProgramRowOpening
+          )}
+        >
+          <div className={styles.devProgramTimeCell}>
+            {getSessionTimeRange(session)}
+          </div>
+          <div className={styles.devProgramSessionCell}>
+            <div className={styles.devProgramDesktopSession}>
+              {options?.opening ? (
+                <div className={styles.devProgramOpeningText}>{sessionTitle}</div>
+              ) : (
+                <div className={styles.devProgramSessionMain}>
+                  {renderSessionLogo(session)}
+                  <div className={styles.devProgramSessionText}>
+                  <div className={styles.devProgramSessionTitle}>{sessionTitle}</div>
+                  {showTalkTitleEn && (
+                    <div className={styles.devProgramSessionTitleEn}>{talkTitleEn}</div>
+                  )}
                 </div>
-                {session.note && (
-                  <div className={clsx(styles.agendaNote, styles.devAgendaCardRole, styles.devAgendaCardNote)}>
-                    {getAgendaText(session.note, isZh)}
+              </div>
+            )}
+            </div>
+
+            <div className={styles.devProgramMobileSession}>
+              {!options?.opening && (
+                <div className={styles.devProgramMobileTop}>
+                  {renderSessionLogo(session)}
+                  <div className={styles.devProgramMobileSpeaker}>
+                    {speakerMetaNode}
                   </div>
+                </div>
+              )}
+              <div
+                className={clsx(
+                  styles.devProgramMobileTitle,
+                  options?.opening && styles.devProgramMobileTitleOpening
+                )}
+              >
+                {options?.opening ? (
+                  <div className={styles.devProgramOpeningText}>{sessionTitle}</div>
+                ) : (
+                  <>
+                    <div className={styles.devProgramSessionTitle}>{sessionTitle}</div>
+                    {showTalkTitleEn && (
+                      <div className={styles.devProgramSessionTitleEn}>{talkTitleEn}</div>
+                    )}
+                  </>
                 )}
               </div>
             </div>
           </div>
-        );
-      })}
-    </div>
-  );
+          <div className={styles.devProgramSpeakerMetaCell}>
+            {speakerMetaNode}
+          </div>
+        </div>
+      );
+    };
 
-  const renderDeveloperConferencePhaseList = (sessions: ActivitySession[]): ReactNode => {
-    const reportSessions = sessions
-      .filter((session) => session.sessionType?.zh === "报告" || session.sessionType?.en === "Talk")
-      .sort((a, b) => {
-        const aSortKey = (a.orgLogoKey && devConfLogoByKey.get(a.orgLogoKey)?.name) || (a.title.en ?? a.title.zh);
-        const bSortKey = (b.orgLogoKey && devConfLogoByKey.get(b.orgLogoKey)?.name) || (b.title.en ?? b.title.zh);
-        return aSortKey.localeCompare(bSortKey, "en", { sensitivity: "base" });
-      });
-    const openingSessions = sessions.filter((session) => session.id === "dev-opening");
-    const panelSessions = sessions.filter((session) => session.id === "dev-panel");
-    const networkingSessions = sessions.filter((session) => session.id === "dev-networking");
-    const openingSpeaker = openingSessions[0]?.speakers
-      ? getAgendaText(openingSessions[0].speakers, isZh)
-      : "";
-
-    const phases = [
-      {
-        key: "dev-phase-showcase",
-        title: isZh ? "报告阵容" : "Featured Talks",
-        items: reportSessions,
-        mode: "cards",
-      },
-      {
-        key: "dev-phase-panel",
-        title: isZh ? "圆桌讨论" : "Panel Discussion",
-        items: panelSessions,
-        mode: "title-only",
-      },
-      {
-        key: "dev-phase-networking",
-        title: isZh ? "交流与自由讨论" : "Networking & Open Discussion",
-        items: networkingSessions,
-        mode: "title-only",
-      },
-    ] satisfies Array<{
-      key: string;
-      title: string;
-      items: ActivitySession[];
-      mode: "cards" | "title-only";
-    }>;
+    const renderSectionRow = (
+      timeRange: string,
+      label: string,
+      options?: { noTime?: boolean }
+    ): ReactNode => (
+      <div
+        key={`${timeRange}-${label}`}
+        className={clsx(
+          styles.devProgramGrid,
+          styles.devProgramRow,
+          styles.devProgramSectionRow,
+          options?.noTime && styles.devProgramSectionRowNoTime
+        )}
+      >
+        <div
+          className={clsx(
+            styles.devProgramTimeCell,
+            options?.noTime && styles.devProgramTimeCellEmpty
+          )}
+          aria-hidden={options?.noTime ? "true" : undefined}
+        >
+          {timeRange}
+        </div>
+        <div className={styles.devProgramSectionCell}>{label}</div>
+      </div>
+    );
 
     return (
-      <div className={styles.agendaPhaseList}>
-        {openingSpeaker && (
-          <div className={styles.agendaPhaseLead}>
-            {isZh ? (
-              <>
-                <strong>召集人</strong>：
-              </>
-            ) : "Convener: "}
-            {renderPersonNameWithBold(openingSpeaker)}
+      <div className={styles.devProgramTable}>
+        <div className={clsx(styles.devProgramGrid, styles.devProgramHeaderRow)}>
+          <div className={styles.devProgramHeadCell}>{isZh ? "时间" : "Time"}</div>
+          <div className={styles.devProgramHeadCell}>{isZh ? "议程" : "Session"}</div>
+          <div className={styles.devProgramHeadCell}>
+            {isZh ? "报告人" : "Speaker"}
           </div>
+        </div>
+
+        {openingSession &&
+          renderSessionRow(openingSession, {
+            opening: true,
+            tinted: stripedSessionIds.has(openingSession.id),
+          })}
+        {sectionOneSessions.length > 0 &&
+          renderSectionRow(
+            getSessionBlockRange(sectionOneSessions),
+            isZh ? "上半场" : "First half"
+          )}
+        {sectionOneSessions.map((session) =>
+          renderSessionRow(session, { tinted: stripedSessionIds.has(session.id) })
         )}
-        {phases.filter((phase) => phase.items.length > 0).map((phase) => (
-          <div key={phase.key} className={styles.agendaPhase}>
-            <div className={styles.agendaPhaseTitle}>{phase.title}</div>
-            {phase.mode === "cards" && renderDeveloperConferenceAgendaList(phase.items)}
-          </div>
-        ))}
+        {coffeeBreakSession &&
+          renderSectionRow(
+            getSessionTimeRange(coffeeBreakSession),
+            getAgendaText(coffeeBreakSession.title, isZh)
+          )}
+        {sectionTwoSessions.length > 0 &&
+          renderSectionRow(
+            getSessionBlockRange(sectionTwoSessions),
+            isZh ? "下半场" : "Second half"
+          )}
+        {sectionTwoSessions.map((session) =>
+          renderSessionRow(session, { tinted: stripedSessionIds.has(session.id) })
+        )}
+        {renderSectionRow("", isZh ? "总结" : "Closing", { noTime: true })}
       </div>
     );
   };
