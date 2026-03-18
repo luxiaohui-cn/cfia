@@ -657,6 +657,7 @@
   align-items: center;
   gap: 0.35rem;
   min-height: 0;
+  margin-bottom: 0.12rem;
 }
 
 .masterCalendarEvent .masterGanttItemRange {
@@ -733,6 +734,14 @@
   text-align: center;
   white-space: pre-line;
   line-height: 1.25;
+}
+
+.timelineDateLabelLong {
+  display: inline;
+}
+
+.timelineDateLabelShort {
+  display: none;
 }
 
 .masterCalendarBoardBody {
@@ -2159,15 +2168,63 @@
   color: #334155;
 }
 
+.agendaPartReportTitleMultiline {
+  white-space: pre-line;
+}
+
 .agendaPartIntro {
   font-size: calc(var(--forum-agenda-fs-body) - 0.05rem);
   line-height: var(--forum-agenda-lh-body);
   font-style: italic;
 }
 
-.agendaPartItem .agendaPartSpeakerTitle {
-  font-size: calc(var(--forum-agenda-fs-title) - 0.08rem);
+.agendaPartMultiline {
+  white-space: pre-line;
+}
+
+.agendaBulletList {
+  margin: 0;
+  padding-left: 1.02rem;
+  display: grid;
+  gap: 0.08rem;
+}
+
+.agendaBulletList li {
+  margin: 0;
+}
+
+.agendaPartSpeakerBlock {
+  margin-top: 0.12rem;
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 9px;
+  border: 1px solid #e2ebf5;
+  background: #f3f7fc;
+}
+
+.agendaPartReportTitle + .agendaPartSpeakerBlock,
+.agendaPartIntro + .agendaPartSpeakerBlock {
+  margin-top: 0.34rem;
+}
+
+.agendaPartSpeakerTitle {
+  margin: 0;
+  font-size: calc(var(--forum-agenda-fs-body) - 0.02rem);
   line-height: var(--forum-agenda-lh-body);
+  color: #4d6070;
+  font-weight: 600;
+}
+
+.agendaPartSpeakerMeta {
+  margin: 0;
+  font-size: calc(var(--forum-agenda-fs-body) - 0.04rem);
+  line-height: var(--forum-agenda-lh-body);
+  color: #5f7080;
+}
+
+.agendaPartPanelSpeakers {
+  line-height: calc(var(--forum-agenda-lh-body) + 0.2);
 }
 
 .agendaPartItem + .agendaPartItem {
@@ -3062,6 +3119,16 @@
   border-top-color: rgba(216, 227, 242, 0.14);
 }
 
+[data-theme='dark'] .agendaPartSpeakerBlock {
+  background: rgba(216, 227, 242, 0.07);
+  border-color: rgba(216, 227, 242, 0.2);
+}
+
+[data-theme='dark'] .agendaPartSpeakerTitle,
+[data-theme='dark'] .agendaPartSpeakerMeta {
+  color: #b8c7d9;
+}
+
 [data-theme='dark'] .agendaPanelMetaTag {
   background: rgba(216, 227, 242, 0.05);
   border-color: rgba(216, 227, 242, 0.16);
@@ -3547,6 +3614,14 @@
 }
 
 @media (max-width: 768px) {
+  .timelineDateLabelLong {
+    display: none;
+  }
+
+  .timelineDateLabelShort {
+    display: inline;
+  }
+
   .hero {
     padding: 3.5rem 0.9rem 2.5rem;
   }
@@ -3761,10 +3836,10 @@
   }
 
   .masterCalendarStackedMobile {
-    --forum-agenda-row-height: 1.075rem;
-    --forum-agenda-edge-padding: 0.32rem;
-    --forum-agenda-stacked-axis-col: 68px;
-    --forum-agenda-prep-col-size: 68px;
+    --forum-agenda-row-height: 1.02rem;
+    --forum-agenda-edge-padding: 0.24rem;
+    --forum-agenda-stacked-axis-col: clamp(54px, 9vw, 68px);
+    --forum-agenda-prep-col-size: clamp(54px, 9vw, 68px);
     --forum-agenda-board-gap: 0.42rem;
     display: grid;
   }
@@ -3795,12 +3870,17 @@
   }
 
   .masterCalendarStackedMobile .masterCalendarBoardAxisCell {
-    padding: 0.22rem 0.2rem;
+    padding: 0.16rem 0.2rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarBoardAxisLabel {
     font-size: 0.62rem;
     padding: 0 0.14rem;
+  }
+
+  .masterCalendarStackedMobile .masterCalendarBoardDayGrid,
+  .masterCalendarStackedMobile .masterCalendarClusterLayer {
+    overflow: visible;
   }
 
   .masterCalendarStackedMobile .masterCalendarClusterLayer {
@@ -3816,14 +3896,16 @@
   }
 
   .masterCalendarStackedMobile .masterCalendarEventShell {
-    padding-top: 0.14rem;
-    padding-bottom: 0.14rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarEvent {
     padding: 0.4rem 0.42rem;
     border-radius: 7px;
-    gap: 0.12rem;
+    gap: 0.18rem;
+    overflow: visible;
+    align-content: start;
   }
 
   .masterCalendarStackedMobile .masterCalendarEvent::before {
@@ -3834,34 +3916,46 @@
   .masterCalendarStackedMobile .masterCalendarEvent .masterPeriodTrackTag {
     padding: 0.08rem 0.3rem;
     font-size: 0.58rem;
+    margin-bottom: 0.26rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarEvent .masterTimelineItemTop {
     gap: 0.22rem;
+    margin-bottom: 0.38rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarEvent .masterTimelineItemTitle {
-    font-size: 0.68rem;
-    line-height: 1.12;
-    -webkit-line-clamp: 2;
+    font-size: 0.7rem;
+    line-height: 1.22;
+    display: block;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: initial;
+    overflow: visible;
+    white-space: pre-line;
+    word-break: break-word;
+    align-self: start;
+    justify-self: stretch;
+    text-align: left;
+    margin-top: 0.1rem;
+    padding-top: 0.08rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarPrepEvent {
-    margin: 0.18rem 0.16rem;
+    margin: 0.12rem 0.12rem;
     border-radius: 7px;
-    padding: 0.28rem 0.15rem;
+    padding: 0.2rem 0.12rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarPrepEventDay {
-    margin: 0.14rem 0.16rem;
+    margin: 0.08rem 0.12rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarPrepEventLabel {
-    font-size: 0.66rem;
+    font-size: 0.62rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarPrepEventDeadline {
-    font-size: 0.56rem;
+    font-size: 0.52rem;
   }
 
   .masterDayTableColumns,
@@ -4551,6 +4645,33 @@
     padding: 0.42rem 0;
   }
 
+  .agendaPartSpeakerBlock {
+    margin-top: 0.08rem;
+    padding: 0.34rem 0.44rem;
+    border-radius: 8px;
+  }
+
+  .agendaPartReportTitle + .agendaPartSpeakerBlock,
+  .agendaPartIntro + .agendaPartSpeakerBlock {
+    margin-top: 0.24rem;
+  }
+
+  .agendaPartSpeakerTitle {
+    font-size: calc(var(--forum-mobile-fs-detail-body) - 0.01rem);
+  }
+
+  .agendaPartSpeakerMeta {
+    font-size: calc(var(--forum-mobile-fs-detail-body) - 0.08rem);
+  }
+
+  .agendaBulletList {
+    padding-left: 0.94rem;
+  }
+
+  .agendaPartPanelSpeakers {
+    line-height: 1.7;
+  }
+
   .agendaItemPlain {
     padding: 0.5rem 0.05rem;
     gap: 0.18rem;
@@ -4585,6 +4706,16 @@
   }
 
   .agendaKeynoteCard .agendaNote {
+    font-size: 0.74rem;
+    line-height: 1.3;
+  }
+
+  .agendaGuestRemarkName {
+    font-size: var(--forum-mobile-fs-detail-title);
+    line-height: 1.26;
+  }
+
+  .agendaGuestRemarkRole {
     font-size: 0.74rem;
     line-height: 1.3;
   }
@@ -4693,10 +4824,10 @@
   }
 
   .masterCalendarStackedMobile {
-    --forum-agenda-row-height: 0.95rem;
-    --forum-agenda-edge-padding: 0.24rem;
-    --forum-agenda-stacked-axis-col: 58px;
-    --forum-agenda-prep-col-size: 58px;
+    --forum-agenda-row-height: 0.92rem;
+    --forum-agenda-edge-padding: 0.16rem;
+    --forum-agenda-stacked-axis-col: clamp(44px, 12vw, 58px);
+    --forum-agenda-prep-col-size: clamp(44px, 12vw, 58px);
     --forum-agenda-board-gap: 0.28rem;
     gap: 0.55rem;
   }
@@ -4722,12 +4853,17 @@
   }
 
   .masterCalendarStackedMobile .masterCalendarBoardAxisCell {
-    padding: 0.18rem 0.12rem;
+    padding: 0.12rem 0.12rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarBoardAxisLabel {
     font-size: 0.56rem;
     padding: 0 0.1rem;
+  }
+
+  .masterCalendarStackedMobile .masterCalendarBoardDayGrid,
+  .masterCalendarStackedMobile .masterCalendarClusterLayer {
+    overflow: visible;
   }
 
   .masterCalendarStackedMobile .masterCalendarClusterLayer {
@@ -4743,14 +4879,16 @@
   }
 
   .masterCalendarStackedMobile .masterCalendarEventShell {
-    padding-top: 0.08rem;
-    padding-bottom: 0.08rem;
+    padding-top: 0.05rem;
+    padding-bottom: 0.05rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarEvent {
     padding: 0.28rem 0.3rem;
     border-radius: 6px;
-    gap: 0.08rem;
+    gap: 0.14rem;
+    overflow: visible;
+    align-content: start;
   }
 
   .masterCalendarStackedMobile .masterCalendarEvent::before {
@@ -4759,34 +4897,47 @@
 
   .masterCalendarStackedMobile .masterCalendarEvent .masterPeriodTrackTag {
     padding: 0.05rem 0.22rem;
-    font-size: 0.52rem;
+    font-size: 0.55rem;
+    margin-bottom: 0.24rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarEvent .masterTimelineItemTop {
     gap: 0.15rem;
+    margin-bottom: 0.34rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarEvent .masterTimelineItemTitle {
-    font-size: 0.6rem;
-    line-height: 1.08;
+    font-size: 0.66rem;
+    line-height: 1.18;
+    display: block;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: initial;
+    overflow: visible;
+    white-space: pre-line;
+    word-break: break-word;
+    align-self: start;
+    justify-self: stretch;
+    text-align: left;
+    margin-top: 0.08rem;
+    padding-top: 0.08rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarPrepEvent {
-    margin: 0.12rem 0.12rem;
+    margin: 0.08rem 0.08rem;
     border-radius: 6px;
-    padding: 0.2rem 0.1rem;
+    padding: 0.14rem 0.08rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarPrepEventDay {
-    margin: 0.1rem 0.12rem;
+    margin: 0.06rem 0.08rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarPrepEventLabel {
-    font-size: 0.58rem;
+    font-size: 0.54rem;
   }
 
   .masterCalendarStackedMobile .masterCalendarPrepEventDeadline {
-    font-size: 0.5rem;
+    font-size: 0.46rem;
   }
 
   .masterDayTableColumns,

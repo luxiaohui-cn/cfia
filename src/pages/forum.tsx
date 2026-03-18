@@ -869,7 +869,7 @@ const agendaGroups: AgendaGroup[] = [
         key: "unep-workshop",
         title: (
           <Translate id="forum.agenda.special.unep">
-            {"UNEP 全球 LCA 平台研讨会\n（邀请制）"}
+            {"UNEP 全球 LCA 平台研讨会（邀请制）"}
           </Translate>
         ),
         lead: (
@@ -961,6 +961,11 @@ const dayLabels: Record<AgendaDayKey, AgendaText> = {
 const timelineDayLabels: Record<AgendaDayKey, AgendaText> = {
   day1: { zh: "3 月 25 日", en: "Mar 25" },
   day2: { zh: "3 月 26 日", en: "Mar 26" },
+};
+
+const timelineDayShortLabels: Record<AgendaDayKey, string> = {
+  day1: "3.25",
+  day2: "3.26",
 };
 
 const trackLabels: Record<AgendaTrackKey, AgendaText> = {
@@ -1483,6 +1488,41 @@ export default function Forum(): ReactNode {
     );
   };
 
+  const renderAgendaBulletItems = (
+    text: string,
+    className?: string
+  ): ReactNode => {
+    const items = text
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    if (items.length === 0) {
+      return null;
+    }
+
+    const firstLine = items[0].replace(/\s+/g, "");
+    if (
+      firstLine === "嘉宾：" ||
+      firstLine === "嘉宾:" ||
+      /^panelists:$/i.test(items[0])
+    ) {
+      items.shift();
+    }
+
+    if (items.length === 0) {
+      return null;
+    }
+
+    return (
+      <ul className={clsx(styles.agendaBulletList, className)}>
+        {items.map((item, itemIndex) => (
+          <li key={`${item}-${itemIndex}`}>{item}</li>
+        ))}
+      </ul>
+    );
+  };
+
   const renderSummaryLeadBlock = (
     summaryLead: AgendaText | undefined,
     options?: { activityKey?: string }
@@ -1713,10 +1753,18 @@ export default function Forum(): ReactNode {
       (_, index) => boardStartMinutes + index * MASTER_AGENDA_GRID_STEP_MINUTES
     );
 
-    const getTimelineDayLabel = (day: AgendaDayKey): string => {
-      return getAgendaText(timelineDayLabels[day], isZh);
-    };
-    const prepRegistrationDayLabel = isZh ? "3 月 24 日" : "Mar 24";
+    const renderResponsiveDateLabel = (longLabel: string, shortLabel: string): ReactNode => (
+      <>
+        <span className={styles.timelineDateLabelLong}>{longLabel}</span>
+        <span className={styles.timelineDateLabelShort}>{shortLabel}</span>
+      </>
+    );
+    const getTimelineDayLabel = (day: AgendaDayKey): ReactNode =>
+      renderResponsiveDateLabel(getAgendaText(timelineDayLabels[day], isZh), timelineDayShortLabels[day]);
+    const prepRegistrationDayLabel = renderResponsiveDateLabel(
+      isZh ? "3 月 24 日" : "Mar 24",
+      "3.24"
+    );
     const registrationLabel = isZh ? "注册" : "Registration";
     const registrationDeadlinePrep = isZh ? "至21点" : "Until 21:00";
     const registrationDeadlineByDay: Partial<Record<AgendaDayKey, string>> = {
@@ -2319,7 +2367,10 @@ export default function Forum(): ReactNode {
                             const isPlainOnlySection = section.sessions.every(
                               (session) => !(session.start && session.end)
                             );
-                            const forceCardListView = detail.activityKey === "power-workshop";
+                            const forceCardListView =
+                              detail.activityKey === "power-workshop" ||
+                              detail.activityKey === "electronics" ||
+                              detail.activityKey === "battery";
                             const isDeveloperLogoCardView =
                               detail.activityKey === "developer-conference";
                             const isMainForumPhaseView =
@@ -2520,11 +2571,33 @@ export default function Forum(): ReactNode {
                                               detail.activityKey,
                                               session
                                             ).trim();
+                                            const hasSessionTime = Boolean(session.start && session.end);
+                                            const sessionTypeText = session.sessionType
+                                              ? getAgendaText(session.sessionType, isZh)
+                                              : "";
+                                            const isPanelSession =
+                                              /圆桌/i.test(sessionTypeText) ||
+                                              /panel|roundtable/i.test(sessionTypeText);
+                                            const hasSpeakerBlock =
+                                              Boolean(sessionDisplayTitle) ||
+                                              Boolean(session.speakers) ||
+                                              Boolean(session.moderator);
 
                                             return (
                                               <article key={session.id} className={styles.agendaPartItem}>
+                                                {hasSessionTime && (
+                                                  <div className={styles.sessionTime}>
+                                                    {session.start} - {session.end}
+                                                  </div>
+                                                )}
                                                 {session.talkTitle && (
-                                                  <div className={styles.agendaPartReportTitle}>
+                                                  <div
+                                                    className={clsx(
+                                                      styles.agendaPartReportTitle,
+                                                      isPanelSession &&
+                                                        styles.agendaPartReportTitleMultiline
+                                                    )}
+                                                  >
                                                     {getAgendaText(session.talkTitle, isZh)}
                                                   </div>
                                                 )}
@@ -2538,26 +2611,36 @@ export default function Forum(): ReactNode {
                                                     {getAgendaText(session.note, isZh)}
                                                   </div>
                                                 )}
-                                                {sessionDisplayTitle && (
-                                                  <div
-                                                    className={clsx(
-                                                      styles.agendaTitle,
-                                                      styles.agendaPartSpeakerTitle
+                                                {hasSpeakerBlock && (
+                                                  <div className={styles.agendaPartSpeakerBlock}>
+                                                    {sessionDisplayTitle && (
+                                                      renderAgendaBulletItems(
+                                                        sessionDisplayTitle,
+                                                        styles.agendaPartSpeakerTitle
+                                                      )
                                                     )}
-                                                  >
-                                                    {sessionDisplayTitle}
-                                                  </div>
-                                                )}
-                                                {session.speakers && (
-                                                  <div className={styles.agendaNote}>
-                                                    {getAgendaText(session.speakers, isZh)}
-                                                  </div>
-                                                )}
-                                                {session.moderator && (
-                                                  <div className={styles.agendaNote}>
-                                                    {moderatorPrefix}
-                                                    {renderPersonNameWithBold(
-                                                      getAgendaText(session.moderator, isZh)
+                                                    {session.speakers && (
+                                                      renderAgendaBulletItems(
+                                                        getAgendaText(session.speakers, isZh),
+                                                        clsx(
+                                                          styles.agendaPartSpeakerMeta,
+                                                          styles.agendaPartMultiline,
+                                                          isPanelSession &&
+                                                            styles.agendaPartPanelSpeakers
+                                                        )
+                                                      )
+                                                    )}
+                                                    {session.moderator && (
+                                                      renderAgendaBulletItems(
+                                                        `${moderatorPrefix}${getAgendaText(
+                                                          session.moderator,
+                                                          isZh
+                                                        )}`,
+                                                        clsx(
+                                                          styles.agendaPartSpeakerMeta,
+                                                          styles.agendaPartMultiline
+                                                        )
+                                                      )
                                                     )}
                                                   </div>
                                                 )}
@@ -2844,7 +2927,7 @@ export default function Forum(): ReactNode {
                       <div className={styles.logoPlaceholderStack}>
                         <span className={styles.logoPlaceholderMark}>+</span>
                         <span className={styles.logoPlaceholderText}>
-                          {isZh ? "持续更新中" : "More updates coming soon"}
+                          {isZh ? "持续更新中" : "More coming soon"}
                         </span>
                       </div>
                     </div>
@@ -3011,10 +3094,10 @@ export default function Forum(): ReactNode {
                     <span className={styles.personPlaceholderMark}>+</span>
                   </div>
                   <div className={styles.personName}>
-                    {isZh ? "持续更新中" : "More updates coming soon"}
+                    {isZh ? "持续更新中" : "More coming soon"}
                   </div>
                   <div className={styles.personTitle}>
-                    {isZh ? "敬请关注" : "More speakers coming soon"}
+                    {isZh ? "敬请关注" : "More coming soon"}
                   </div>
                 </div>
               </div>
