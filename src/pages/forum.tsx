@@ -2470,11 +2470,6 @@ export default function Forum(): ReactNode {
                                 {getAgendaText(detail.summary, isZh)}
                               </div>
                             )}
-                            {!detail.hideSummaryUpdateNote && (
-                              <div className={styles.agendaPanelSummaryNote}>
-                                {isZh ? "详细日程后续更新" : "A detailed agenda will be published soon"}
-                              </div>
-                            )}
                           </>
                         ) : (
                         <>
@@ -2492,7 +2487,10 @@ export default function Forum(): ReactNode {
                             const forceCardListView =
                               detail.activityKey === "power-workshop" ||
                               detail.activityKey === "electronics" ||
-                              detail.activityKey === "battery";
+                              detail.activityKey === "battery" ||
+                              detail.activityKey === "petrochemical" ||
+                              detail.activityKey === "lca-audit" ||
+                              detail.activityKey === "china-lca";
                             const isDeveloperLogoCardView =
                               detail.activityKey === "developer-conference";
                             const isMainForumPhaseView =
