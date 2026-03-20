@@ -90,7 +90,7 @@ export const masterAgendaSlots: MasterAgendaSlot[] = [
     activityKey: "national-factor-database-forum",
     shortTitle: {
       zh: "碳足迹因子库建设专题研讨会",
-      en: "China National Carbon Footprint Database Workshop",
+      en: "Workshop on the Development of a LCA/PCF Database",
     },
     status: "pending",
   },
@@ -359,7 +359,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         end: "14:10",
         sessionType: { zh: "主题演讲", en: "Thematic Talks" },
         title: {
-          zh: "牛皓，生态环境部环境工程评估中心副主任 正高级工程师",
+          zh: "牛皓，生态环境部环境工程评估中心 正高级工程师",
           en: "Hao Niu, Deputy Director, Environmental Engineering Assessment Center, Ministry of Ecology and Environment; Professorate Senior Engineer",
         },
         talkTitle: {
@@ -859,7 +859,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         },
         talkTitle: {
           zh: "巴西LCA数据库建设",
-          en: "Building the LCA database in Brazil",
+          en: "Building the LCA database in Brazil (Draft)",
         },
       },
       {
@@ -873,8 +873,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Jitti Mungkalasiri, Director, Sustainable Development Technology and Information Institute, National Science and Technology Development Agency (NSTDA), Thailand",
         },
         talkTitle: {
-          zh: "报告题目待定",
-          en: "Title TBD",
+          zh: "可信LCA数据基础设施构建（泰国）",
+          en: "Towards a trusted LCA data infrastructure in Thailand (Draft)",
         },
       },
       {
@@ -884,7 +884,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         end: "16:10",
         sessionType: { zh: "主旨报告", en: "Keynote Speeches" },
         title: {
-          zh: "Jean Yang，通标标准技术服务有限公司（SGS）能源低碳主任审核员",
+          zh: "Jean Yang，通标标准技术服务有限公司SGS 能源低碳主任审核员",
           en: "Jean Yang, Lead Auditor for Energy and Low Carbon, SGS",
         },
         talkTitle: {
@@ -913,8 +913,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Topic: Data Quality, Verification, and Trusted Use of LCA/CF Data",
         },
         speakers: {
-          zh: "Sangwon Suh，清华大学讲席教授\nShabbir H. Gheewala，泰国国王科技大学教授\nThiago Oliveira Rodrigues，巴西科技信息研究所（IBICT）高级研究员\nJitti Mungkalasiri，泰国国家科学技术发展署（NSTDA）可持续发展技术与信息研究所所长\nJean Yang，SGS能源低碳主任审核员",
-          en: "Sangwon Suh, Chair Professor, Tsinghua University\nShabbir H. Gheewala, Professor, King Mongkut's University of Technology Thonburi\nThiago Oliveira Rodrigues, Senior Researcher, Brazilian Institute of Information in Science and Technology (IBICT)\nJitti Mungkalasiri, Director, Sustainable Development Technology and Information Institute, NSTDA\nJean Yang, Lead Auditor for Energy and Low Carbon, SGS",
+          zh: "Sangwon Suh，清华大学讲席教授 & 天工智库\nShabbir H. Gheewala，泰国国王科技大学\nThiago Oliveira Rodrigues，巴西科技信息研究所（IBICT）\nJitti Mungkalasiri，泰国国家科学技术发展署（NSTDA）\nYang Liu，LRQA（劳盛）英国\nJean Yang，SGS 苏州",
+          en: "Sangwon Suh, Chair Professor, Tsinghua University & TianGong Think Tank\nShabbir H. Gheewala, King Mongkut's University of Technology Thonburi\nThiago Oliveira Rodrigues, Brazilian Institute of Information in Science and Technology (IBICT)\nJitti Mungkalasiri, National Science and Technology Development Agency (NSTDA), Thailand\nYang Liu, LRQA (UK)\nJean Yang, SGS Suzhou",
         },
       },
       {
@@ -1217,7 +1217,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     groupKey: "special-events",
     title: {
       zh: "碳足迹因子库建设专题研讨会",
-      en: "China National Carbon Footprint Database Workshop",
+      en: "Workshop on the Development of a Carbon Footprint Factor Database",
     },
     summary: {
       zh: "本专题研讨会围绕生态环境部《产品碳足迹因子数据库建设工作指引》开展技术研讨与交流，面向国家与地方因子库建设相关科研机构、技术服务机构、行业协会与企业。会议聚焦高质量因子库建设的方法论与口径、数据结构与元数据、数据资源与质量管理、辅助工具与平台支撑等关键问题，通过专题报告、案例分享与技术交流，推动构建覆盖广、质量高、可持续更新且具国际影响力的产品碳足迹数据体系。",
@@ -1283,7 +1283,10 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           zh: "谢明辉 ｜ 中国环境科学研究院 环境管理研究中心主任 研究员",
           en: "Minghui Xie\nChinese Research Academy of Environmental Sciences\nDirector/Researcher, Environmental Management Research Center",
         },
-        talkTitle: { zh: "报告2", en: "Report 2" },
+        talkTitle: {
+          zh: "中国光伏行业LCA研究与思考",
+          en: "LCA Research and Reflections on China's Photovoltaic Industry",
+        },
       },
       {
         id: "china-lca-report-3",
@@ -1292,10 +1295,13 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         end: "10:00",
         sessionType: { zh: "报告", en: "Report" },
         title: {
-          zh: "吕彬 ｜ 中国科学院生态环境研究中心 副研究员",
-          en: "Bin Lv\nAssociate Researcher, Research Center for Eco-Environmental Sciences, Chinese Academy of Sciences",
+          zh: "刘宇 ｜ 北京工业大学 教授",
+          en: "Yu Liu\nProfessor, Beijing University of Technology",
         },
-        talkTitle: { zh: "报告3", en: "Report 3" },
+        talkTitle: {
+          zh: "材料生命周期评价研究及应用",
+          en: "Research and Applications of Material Life Cycle Assessment",
+        },
       },
       {
         id: "china-lca-report-4",
@@ -1304,10 +1310,13 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         end: "10:15",
         sessionType: { zh: "报告", en: "Report" },
         title: {
-          zh: "刘宇 ｜ 北京工业大学 教授",
-          en: "Yu Liu\nProfessor, Beijing University of Technology",
+          zh: "吕彬 ｜ 中国科学院生态环境研究中心 副研究员",
+          en: "Bin Lv\nAssociate Researcher, Research Center for Eco-Environmental Sciences, Chinese Academy of Sciences",
         },
-        talkTitle: { zh: "报告4", en: "Report 4" },
+        talkTitle: {
+          zh: "面向决策支撑的生命周期评价：应用实践与趋势思考",
+          en: "Decision-Support-Oriented Life Cycle Assessment: Applied Practice and Trend Insights",
+        },
       },
       {
         id: "china-lca-report-5",
@@ -1319,7 +1328,10 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           zh: "张哲 ｜ 生态环境部环境规划院 助理研究员",
           en: "Zhe Zhang\nAssistant Researcher, Chinese Academy of Environmental Planning, Ministry of Ecology and Environment",
         },
-        talkTitle: { zh: "报告5", en: "Report 5" },
+        talkTitle: {
+          zh: "产品碳足迹发展与CPCD 数据库建设实践",
+          en: "Product Carbon Footprint Development and CPCD Database Construction Practices",
+        },
       },
     ],
   },
@@ -1377,8 +1389,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Patrick McMaster, China Lead, IEA Centre for Energy Efficiency and Inclusive Transitions",
         },
         talkTitle: {
-          zh: "主题发言一：全球能源转型背景下的电力系统脱碳进展与排放趋势",
-          en: "Thematic Talk 1: Decarbonization Progress and Emission Trends of Power Systems under the Global Energy Transition",
+          zh: "电气化时代的电力行业",
+          en: "The Power Sector in the Age of Electricity",
         },
       },
       {
@@ -1392,8 +1404,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Qimin Chai, Director, Strategic Planning Department, National Center for Climate Change Strategy and International Cooperation",
         },
         talkTitle: {
-          zh: "主题发言二：2035年国家自主贡献及“十五五”规划实施路径研究",
-          en: "Thematic Talk 2: Pathways for 2035 NDC and the 15th Five-Year Plan Implementation",
+          zh: "2035年国家自主贡献及“十五五”规划实施路径研究",
+          en: "Pathways for 2035 NDC and the 15th Five-Year Plan Implementation",
         },
       },
       {
@@ -1407,8 +1419,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Jingxuan Hui, Deputy Director, Environmental Center, Energy Research Institute, NDRC",
         },
         talkTitle: {
-          zh: "主题发言三：我国“十五五”碳排放政策展望",
-          en: "Thematic Talk 3: Outlook for China's Carbon-Emission Policies in the 15th Five-Year Plan",
+          zh: "我国“十五五”碳排放政策展望",
+          en: "Outlook for China's Carbon-Emission Policies in the 15th Five-Year Plan",
         },
       },
       {
@@ -1422,8 +1434,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Jingjie Zhang, Deputy Director, Planning and Development Department (Low-Carbon Research Division), China Electricity Council",
         },
         talkTitle: {
-          zh: "主题发言四：中国电力碳足迹量化方法与标准体系建设",
-          en: "Thematic Talk 4: Quantification Methods and Standards-System Development for China's Power Carbon Footprint",
+          zh: "中国电力碳足迹量化方法与标准体系建设",
+          en: "Quantification Methods and Standards-System Development for China's Power Carbon Footprint",
         },
       },
       {
@@ -1437,8 +1449,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Zhengping Gao, Staff, Development Planning Department, State Grid Jiangsu Electric Power Co., Ltd.",
         },
         talkTitle: {
-          zh: "主题发言五：分时分区电碳因子研究发展与江苏实践",
-          en: "Thematic Talk 5: Development of Time- and Region-specific Electricity Carbon Factors and Jiangsu Practices",
+          zh: "分时分区电碳因子研究发展与江苏实践",
+          en: "Development of Time- and Region-specific Electricity Carbon Factors and Jiangsu Practices",
         },
       },
       {
@@ -1452,8 +1464,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Zhuohui Huang, Research Associate, Sustainable Transition Center, WRI Beijing Representative Office",
         },
         talkTitle: {
-          zh: "主题发言六：国际标准协调统一背景下对电力碳足迹核算方法的影响",
-          en: "Thematic Talk 6: Impacts of International Standards Harmonization on Power Carbon-Footprint Accounting Methods",
+          zh: "国际标准协调统一背景下对电力碳足迹核算方法的影响",
+          en: "Impacts of International Standards Harmonization on Power Carbon-Footprint Accounting Methods",
         },
       },
       {
@@ -1475,7 +1487,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Zhuo Li, Program Manager, Clean Power Program, Energy Foundation China",
         },
         speakers: {
-          zh: "柴麒敏，国家气候战略中心战略规划部\n石丽娜，中电联规划发展部低碳处处长\n蒋文闻，上海市经济信息中心绿色发展部副主任\n黄杰，国电南瑞稳定公司部门经理、正高级工程师",
+          zh: "柴麒敏，国家气候战略中心战略规划部主任\n石丽娜，中电联规划发展部低碳处处长\n蒋文闻，上海市经济信息中心绿色发展部副主任\n黄杰，国电南瑞稳定公司部门经理、正高级工程师",
           en: "Qimin Chai, Strategic Planning Department, National Center for Climate Change Strategy and International Cooperation\nLina Shi, Director, Low-Carbon Division, Planning and Development Department, China Electricity Council\nWenwen Jiang, Deputy Director, Green Development Department, Shanghai Economic Information Center\nJie Huang, Department Manager and Senior Engineer, NARI Stability Company",
         },
       },
