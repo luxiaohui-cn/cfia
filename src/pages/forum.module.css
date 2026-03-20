@@ -1439,6 +1439,11 @@
   line-height: var(--forum-agenda-lh-body);
 }
 
+.agendaPanelSummaryTheme {
+  font-weight: 700;
+  color: #334155;
+}
+
 .agendaPanelSummaryLead {
   display: grid;
   gap: 0.35rem;
@@ -3334,6 +3339,11 @@
   color: #b8c7d9;
 }
 
+[data-theme='dark'] .agendaPartHeading,
+[data-theme='dark'] .agendaPartReportTitle {
+  color: #e7eef8;
+}
+
 [data-theme='dark'] .agendaPanelMetaTag {
   background: rgba(216, 227, 242, 0.05);
   border-color: rgba(216, 227, 242, 0.16);
@@ -3377,6 +3387,10 @@
 }
 
 [data-theme='dark'] .agendaPanelSummaryLeadLabel {
+  color: #e0e8f5;
+}
+
+[data-theme='dark'] .agendaPanelSummaryTheme {
   color: #e0e8f5;
 }
 

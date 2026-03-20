@@ -1243,8 +1243,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
       en: "Moderator:\nNing Yu, Party Secretary and Professor, Chongqing University of Technology",
     },
     summary: {
-      zh: "符合国情 · 全球普适：中国的LCA",
-      en: "China-Fit, Globally Applicable: LCA in China",
+      zh: "活动主题：符合国情 · 全球普适：中国的LCA",
+      en: "Theme: China-Fit, Globally Applicable: LCA in China",
     },
     dateLabel: { zh: "2026 年 3 月 25 日", en: "March 25, 2026" },
     timeRange: "Day 1 09:00-10:30",
@@ -1280,7 +1280,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         end: "09:45",
         sessionType: { zh: "报告", en: "Report" },
         title: {
-          zh: "谢明辉 ｜ 中国环境科学研究院 境管理研究中心主任 研究员",
+          zh: "谢明辉 ｜ 中国环境科学研究院 环境管理研究中心主任 研究员",
           en: "Minghui Xie\nChinese Research Academy of Environmental Sciences\nDirector/Researcher, Environmental Management Research Center",
         },
         talkTitle: { zh: "报告2", en: "Report 2" },
@@ -1304,8 +1304,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         end: "10:15",
         sessionType: { zh: "报告", en: "Report" },
         title: {
-          zh: "刘宇 ｜ 北京工业大学 副教授",
-          en: "Yu Liu\nAssociate Professor, Beijing University of Technology",
+          zh: "刘宇 ｜ 北京工业大学 教授",
+          en: "Yu Liu\nProfessor, Beijing University of Technology",
         },
         talkTitle: { zh: "报告4", en: "Report 4" },
       },
@@ -1316,7 +1316,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         end: "10:30",
         sessionType: { zh: "报告", en: "Report" },
         title: {
-          zh: "张哲 ｜ 生态环境部战略规划院 助理研究员",
+          zh: "张哲 ｜ 生态环境部环境规划院 助理研究员",
           en: "Zhe Zhang\nAssistant Researcher, Chinese Academy of Environmental Planning, Ministry of Ecology and Environment",
         },
         talkTitle: { zh: "报告5", en: "Report 5" },
@@ -1328,8 +1328,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     groupKey: "sub-forums",
     title: { zh: "电力", en: "Power" },
     summaryLeadTop: {
-      zh: "主办：\n国网江苏省电力公司\n清华苏州环境创新研究院 天工智库中心",
-      en: "Organizers:\nState Grid Jiangsu Electric Power Co., Ltd.\nTianGong Think Tank Center, Tsinghua Suzhou Institute for Environmental Innovation",
+      zh: "主办：\n国网江苏省电力公司\n清华苏州环境创新研究院 天工智库中心\n上海市经济信息中心",
+      en: "Organizers:\nState Grid Jiangsu Electric Power Co., Ltd.\nTianGong Think Tank Center, Tsinghua Suzhou Institute for Environmental Innovation\nShanghai Economic Information Center",
     },
     summaryLead: {
       zh: "召集人：\n郑颖，北京电链科技有限公司双碳事业部总监/清华天工智库中心特邀研究员\n李卓，能源基金会清洁电力项目主管\n陈钰什，清华天工智库特聘研究员",
@@ -1437,8 +1437,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Zhengping Gao, Staff, Development Planning Department, State Grid Jiangsu Electric Power Co., Ltd.",
         },
         talkTitle: {
-          zh: "主题发言五：电力碳足迹标准发展与江苏实践",
-          en: "Thematic Talk 5: Development of Power Carbon-Footprint Standards and Jiangsu Practices",
+          zh: "主题发言五：分时分区电碳因子研究发展与江苏实践",
+          en: "Thematic Talk 5: Development of Time- and Region-specific Electricity Carbon Factors and Jiangsu Practices",
         },
       },
       {

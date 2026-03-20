@@ -1462,6 +1462,15 @@ export default function Forum(): ReactNode {
     );
   };
 
+  const isModeratorLabel = (label: string): boolean => {
+    const normalized = label.trim().toLowerCase();
+    return (
+      /主持人?/.test(label) ||
+      normalized.startsWith("host") ||
+      normalized.startsWith("moderator")
+    );
+  };
+
   const getSummaryLeadLabel = (label: string, activityKey?: string): string => {
     if (activityKey === "unep-workshop" && isHostOrModeratorLabel(label)) {
       return isZh ? "召集人" : "Convener";
@@ -1567,6 +1576,23 @@ export default function Forum(): ReactNode {
         const [, inlineLabel, inlineValue] = inlineMatch;
         const renderedLabel = getSummaryLeadLabel(inlineLabel, options?.activityKey);
         const highlightName = isHostOrModeratorLabel(renderedLabel);
+        if (isModeratorLabel(renderedLabel)) {
+          return (
+            <div className={clsx(styles.agendaPanelSummary, styles.agendaPanelSummaryLead)}>
+              <div className={styles.agendaPanelSummaryLeadHead}>
+                <span className={styles.agendaPanelSummaryLeadLabel}>
+                  {renderedLabel}
+                  {labelSuffix}
+                </span>
+              </div>
+              <ul className={styles.agendaPanelSummaryLeadList}>
+                <li className={styles.agendaPanelSummaryLeadItem}>
+                  {highlightName ? renderPersonNameWithBold(inlineValue) : inlineValue}
+                </li>
+              </ul>
+            </div>
+          );
+        }
         return (
           <div
             className={clsx(
@@ -1590,6 +1616,23 @@ export default function Forum(): ReactNode {
     const highlightName = isHostOrModeratorLabel(label);
 
     if (items.length <= 1) {
+      if (items[0] && isModeratorLabel(label)) {
+        return (
+          <div className={clsx(styles.agendaPanelSummary, styles.agendaPanelSummaryLead)}>
+            <div className={styles.agendaPanelSummaryLeadHead}>
+              <span className={styles.agendaPanelSummaryLeadLabel}>
+                {label}
+                {labelSuffix}
+              </span>
+            </div>
+            <ul className={styles.agendaPanelSummaryLeadList}>
+              <li className={styles.agendaPanelSummaryLeadItem}>
+                {highlightName ? renderPersonNameWithBold(items[0]) : items[0]}
+              </li>
+            </ul>
+          </div>
+        );
+      }
       return (
         <div
           className={clsx(
@@ -2370,6 +2413,8 @@ export default function Forum(): ReactNode {
                   : (detail.activityKey.includes("workshop") ? "Moderator: " : "Host: ");
                 const showSummaryOnlyBody =
                   detail.sessions.length === 0 && Boolean(detail.summary);
+                const showChinaLcaTheme =
+                  detail.activityKey === "china-lca" && Boolean(detail.summary);
 
                 return (
                   <div
@@ -2459,13 +2504,23 @@ export default function Forum(): ReactNode {
 
                         {showSummaryOnlyBody ? (
                           <>
+                            {showChinaLcaTheme && detail.summary && (
+                              <div
+                                className={clsx(
+                                  styles.agendaPanelSummary,
+                                  styles.agendaPanelSummaryTheme
+                                )}
+                              >
+                                {getAgendaText(detail.summary, isZh)}
+                              </div>
+                            )}
                             {renderSummaryLeadBlock(detail.summaryLeadTop, {
                               activityKey: detail.activityKey,
                             })}
                             {renderSummaryLeadBlock(detail.summaryLead, {
                               activityKey: detail.activityKey,
                             })}
-                            {detail.summary && (
+                            {detail.summary && !showChinaLcaTheme && (
                               <div className={styles.agendaPanelSummary}>
                                 {getAgendaText(detail.summary, isZh)}
                               </div>
@@ -2473,6 +2528,16 @@ export default function Forum(): ReactNode {
                           </>
                         ) : (
                         <>
+                          {showChinaLcaTheme && detail.summary && (
+                            <div
+                              className={clsx(
+                                styles.agendaPanelSummary,
+                                styles.agendaPanelSummaryTheme
+                              )}
+                            >
+                              {getAgendaText(detail.summary, isZh)}
+                            </div>
+                          )}
                           {renderSummaryLeadBlock(detail.summaryLeadTop, {
                             activityKey: detail.activityKey,
                           })}
