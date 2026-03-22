@@ -298,16 +298,12 @@ const people: {
   image?: string;
 }[] = [
   {
-    key: "tiago-braga",
-    nameEn: "Tiago Braga",
-    nameZh: "Tiago Braga",
-    titleZh: <>巴西科学与技术信息研究所（Ibict）所长</>,
-    titleEn: (
-      <>
-        Director of the Brazilian Institute of Information in Science and Technology (Ibict)
-      </>
-    ),
-    image: "img/tg-forum/people/TiagoB-ibict.JPG",
+    key: "thiago-rodrigues",
+    nameEn: "Thiago Oliveira Rodrigues",
+    nameZh: "Thiago Oliveira Rodrigues",
+    titleZh: <>巴西科学与技术信息研究所（Ibict）高级研究员</>,
+    titleEn: <>Senior researcher, Brazilian Institute for Science and Technology Information (Ibict)</>,
+    image: "img/tg-forum/people/ThiagoR-ibict.jpeg",
   },
   {
     key: "andreas-ciroth",
@@ -332,8 +328,7 @@ const people: {
     titleZh: <>国家气候战略中心战略规划部主任、研究员</>,
     titleEn: (
       <>
-        Director and Research Fellow, Strategic Planning Department, National
-        Center for Climate Change Strategy and International Cooperation
+        Director and Research Fellow, Strategic Planning Department, NCSC
       </>
     ),
     image: "img/tg-forum/people/QiminC-ncsc.jpg",
@@ -345,14 +340,6 @@ const people: {
     titleZh: <>AECOM 高级碳咨询顾问</>,
     titleEn: <>Senior Carbon Consultant, AECOM</>,
     image: "img/tg-forum/people/NatashaD-AECOM.jpg",
-  },
-  {
-    key: "archana-datta",
-    nameEn: "Archana Datta",
-    nameZh: "Archana Datta",
-    titleZh: <>UNEP LCI 项目管理官员</>,
-    titleEn: <>Programme Management Officer, UNEP Life Cycle Initiative</>,
-    image: "img/tg-forum/people/ArchanaD-unep.jpg",
   },
   {
     key: "matthias-finkbeiner",

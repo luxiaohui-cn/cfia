@@ -467,8 +467,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Yongliang Li, Secretary-General, China Chemical Energy Conservation Technology Association; Director, Department of Science & Technology and Equipment, China Petroleum and Chemical Industry Federation",
         },
         speakers: {
-          zh: "田涛，中国石化节能技术服务中心/中石化节能技术服务有限公司技术副总监/教授级高级工程师\n于波，中国海油集团公司质量健康安全环保部副处长\n朱建民，辽宁奥克化学股份有限公司董事长\n武振华，中化能科碳资产运营有限公司副总经理\n张杲，中国碳排放权注册登记结算有限责任公司副总经理\n谢修平，中标合信（北京）认证有限公司副总经理\n赵俊峰，鼎力可持续数字科技公司气候变化总监",
-          en: "Tao Tian, Deputy Technical Director, Sinopec Energy Conservation Technology Service Center / Sinopec Energy Conservation Technology Service Co., Ltd.; Professorate Senior Engineer\nBo Yu, Deputy Division Director, Quality, Health, Safety and Environmental Protection Department, CNOOC Group\nJianmin Zhu, Chairman, Liaoning Oxiranchem Inc.\nZhenhua Wu, Deputy General Manager, Sinochem Energy Technology Carbon Asset Operations Co., Ltd.\nGao Zhang, Deputy General Manager, China Emissions Exchange Registry and Clearing Co., Ltd.\nXiuping Xie, Deputy General Manager, Zhongbiao Hexin (Beijing) Certification Co., Ltd.\nJunfeng Zhao, Climate Change Director, Dingli Sustainable Digital Technology",
+          zh: "田涛，中国石化节能技术服务中心/中石化节能技术服务有限公司技术副总监/教授级高级工程师\n于波，中国海油集团公司质量健康安全环保部副处长\n朱建民，辽宁奥克化学股份有限公司董事长\n武振华，中化能科碳资产运营有限公司副总经理\n杨光星，中国碳排放权注册登记结算有限责任公司副总经理\n谢修平，中标合信（北京）认证有限公司副总经理\n赵俊峰，鼎力可持续数字科技公司气候变化总监",
+          en: "Tao Tian, Deputy Technical Director, Sinopec Energy Conservation Technology Service Center / Sinopec Energy Conservation Technology Service Co., Ltd.; Professorate Senior Engineer\nBo Yu, Deputy Division Director, Quality, Health, Safety and Environmental Protection Department, CNOOC Group\nJianmin Zhu, Chairman, Liaoning Oxiranchem Inc.\nZhenhua Wu, Deputy General Manager, Sinochem Energy Technology Carbon Asset Operations Co., Ltd.\nGuangxing Yang, Deputy General Manager, China Emissions Exchange Registry and Clearing Co., Ltd.\nXiuping Xie, Deputy General Manager, Zhongbiao Hexin (Beijing) Certification Co., Ltd.\nJunfeng Zhao, Climate Change Director, Dingli Sustainable Digital Technology",
         },
       },
       {
@@ -1053,8 +1053,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         sessionType: { zh: "报告", en: "Talk" },
         speakers: { zh: "陆嘉麒", en: "Jiaqi Lu" },
         talkTitle: {
-          zh: "Nebula LCA：构建兼容 TIDAS 的开源框架，支持复杂生产系统的多尺度 LCA",
-          en: "Nebula LCA: Engineering a TIDAS-compatible open-source framework for multi-scale LCA of complex production systems",
+          zh: "Nebula LCA：打造由 TIDAS 驱动的开源框架，兼容复杂生产系统的多尺度 LCA",
+          en: "Nebula LCA: Engineering a TIDAS-powered open-source framework for multi-scale LCA of complex production systems compatible",
         },
         note: {
           zh: "上海工程技术大学碳足迹实验室负责人",
