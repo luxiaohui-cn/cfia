@@ -677,6 +677,11 @@ const organizerLogos: { key: string; name: string; src: string }[] = [
     name: "CSES",
     src: "img/tg-forum/partner-logo/cses.png",
   },
+  {
+    key: "envision",
+    name: "Envision",
+    src: "img/tg-forum/partner-logo/envision.png",
+  },
 ];
 
 const supportInstitutionLogos: {
@@ -803,11 +808,11 @@ const agendaGroups: AgendaGroup[] = [
       {
         key: "lca-audit",
         title: (
-          <Translate id="forum.agenda.subForums.audit">数据（英文）</Translate>
+          <Translate id="forum.agenda.subForums.audit">LCA与碳足迹数据</Translate>
         ),
         lead: (
           <Translate id="forum.agenda.subForums.audit.lead">
-            汇聚全球 LCA 与碳足迹数据实践，探讨数据质量等关键议题。
+            聚焦数据库、核证与数据质量的全球实践。
           </Translate>
         ),
         icon: "forum",
@@ -1442,10 +1447,11 @@ export default function Forum(): ReactNode {
   const isHostOrModeratorLabel = (label: string): boolean => {
     const normalized = label.trim().toLowerCase();
     return (
-      /主持人?|召集人/.test(label) ||
+      /主持人?|召集人|联合组织者/.test(label) ||
       normalized.startsWith("host") ||
       normalized.startsWith("moderator") ||
-      normalized.startsWith("convener")
+      normalized.startsWith("convener") ||
+      normalized.startsWith("co-organizer")
     );
   };
 
@@ -1474,34 +1480,101 @@ export default function Forum(): ReactNode {
     return getAgendaText(session.title, isZh);
   };
 
-  const renderPersonNameWithBold = (value: string): ReactNode => {
+  const personPlaceholderPattern =
+    /^(持续邀请|敬请期待|待定|待补|更多嘉宾|Audience Q&A|Q&A|TBD|Coming Soon)/i;
+
+  const personLeadLabelPattern =
+    /^((?:主持人?|主持|Moderator|Host|Convener|召集人)\s*[：:]\s*)(.+)$/i;
+
+  const parsePersonDisplayParts = (
+    value: string
+  ): { prefix: string; name: string; tail: string } | null => {
     const text = value.trim();
-    if (!text) {
+    if (!text || personPlaceholderPattern.test(text)) {
+      return null;
+    }
+
+    let prefix = "";
+    let remainder = text;
+    const labelMatch = text.match(personLeadLabelPattern);
+    if (labelMatch) {
+      prefix = labelMatch[1];
+      remainder = labelMatch[2].trim();
+    }
+
+    const separatorIndex = remainder.search(/[｜|，,]/);
+    if (separatorIndex >= 0) {
+      const name = remainder.slice(0, separatorIndex).trim();
+      const tail = remainder.slice(separatorIndex);
+      if (name) {
+        return { prefix, name, tail };
+      }
+    }
+
+    const zhWhitespaceMatch = remainder.match(
+      /^([\p{Script=Han}][\p{Script=Han}A-Za-z·•]{1,15})\s+(.+)$/u
+    );
+    if (zhWhitespaceMatch) {
+      return {
+        prefix,
+        name: zhWhitespaceMatch[1],
+        tail: ` ${zhWhitespaceMatch[2]}`,
+      };
+    }
+
+    return remainder ? { prefix, name: remainder, tail: "" } : null;
+  };
+
+  const formatPersonTail = (tail: string): string => {
+    const normalized = tail.trim();
+    if (!normalized) {
       return "";
     }
 
-    const separatorIndex = text.search(/[，,]/);
-    if (separatorIndex < 0) {
-      return <strong>{text}</strong>;
+    if (/^[｜|，,]/.test(normalized)) {
+      const content = normalized.replace(/^[｜|，,]\s*/, "").trim();
+      if (!content) {
+        return "";
+      }
+      return isZh ? `，${content}` : `, ${content}`;
     }
 
-    const namePart = text.slice(0, separatorIndex).trim();
-    const tailPart = text.slice(separatorIndex);
-    if (!namePart) {
-      return text;
+    return ` ${normalized}`;
+  };
+
+  const renderPersonNameWithBold = (value: string): ReactNode => {
+    const parts = parsePersonDisplayParts(value);
+    if (!parts) {
+      return value.trim();
     }
 
     return (
       <>
-        <strong>{namePart}</strong>
-        {tailPart}
+        {parts.prefix}
+        <strong>{parts.name}</strong>
+        {formatPersonTail(parts.tail)}
       </>
     );
   };
 
+  const splitPersonNameAndRole = (
+    value: string
+  ): { name: string; role: string } | null => {
+    const parts = parsePersonDisplayParts(value);
+    if (!parts) {
+      return null;
+    }
+
+    return {
+      name: parts.name,
+      role: parts.tail.replace(/^[\s｜|，,]+/, "").trim(),
+    };
+  };
+
   const renderAgendaBulletItems = (
     text: string,
-    className?: string
+    className?: string,
+    options?: { boldName?: boolean; stackedNameRole?: boolean }
   ): ReactNode => {
     const items = text
       .split(/\r?\n/)
@@ -1525,10 +1598,34 @@ export default function Forum(): ReactNode {
       return null;
     }
 
+    const renderBulletItemContent = (item: string): ReactNode => {
+      if (options?.stackedNameRole) {
+        const parts = splitPersonNameAndRole(item);
+        if (!parts) {
+          return item;
+        }
+
+        return (
+          <span className={styles.agendaPhaseRemarkBulletText}>
+            <span className={styles.agendaPhaseRemarkBulletName}>{parts.name}</span>
+            {parts.role && (
+              <span className={styles.agendaPhaseRemarkBulletRole}>{parts.role}</span>
+            )}
+          </span>
+        );
+      }
+
+      if (options?.boldName) {
+        return renderPersonNameWithBold(item);
+      }
+
+      return item;
+    };
+
     return (
       <ul className={clsx(styles.agendaBulletList, className)}>
         {items.map((item, itemIndex) => (
-          <li key={`${item}-${itemIndex}`}>{item}</li>
+          <li key={`${item}-${itemIndex}`}>{renderBulletItemContent(item)}</li>
         ))}
       </ul>
     );
@@ -2541,8 +2638,12 @@ export default function Forum(): ReactNode {
                               detail.activityKey === "electronics" ||
                               detail.activityKey === "battery" ||
                               detail.activityKey === "petrochemical" ||
+                              detail.activityKey === "national-factor-database-forum" ||
                               detail.activityKey === "lca-audit" ||
                               detail.activityKey === "china-lca";
+                            const emphasizeForumPeople =
+                              detail.groupKey === "sub-forums" ||
+                              detail.groupKey === "special-events";
                             const isDeveloperLogoCardView =
                               detail.activityKey === "developer-conference";
                             const isMainForumPhaseView =
@@ -2572,7 +2673,12 @@ export default function Forum(): ReactNode {
 
                             const mainForumPhases = isMainForumPhaseView
                               ? section.sessions.reduce<
-                                  Array<{ key: string; title: string; items: ActivitySession[] }>
+                                  Array<{
+                                    key: string;
+                                    title: string;
+                                    lead?: string;
+                                    items: ActivitySession[];
+                                  }>
                                 >((phases, session) => {
                                   if (session.sessionType) {
                                     const phaseTitle = getAgendaText(session.sessionType, isZh);
@@ -2594,6 +2700,9 @@ export default function Forum(): ReactNode {
                                   phases.push({
                                     key: `phase-${session.id}`,
                                     title: getSessionDisplayTitle(detail.activityKey, session),
+                                    lead: session.speakers
+                                      ? getAgendaText(session.speakers, isZh)
+                                      : (session.note ? getAgendaText(session.note, isZh) : undefined),
                                     items: [],
                                   });
 
@@ -2613,124 +2722,149 @@ export default function Forum(): ReactNode {
                                   renderDeveloperConferencePhaseList(section.sessions)
                                 ) : isMainForumPhaseView ? (
                                   <div className={styles.agendaPhaseList}>
-                                    {mainForumPhases.map((phase) => (
-                                      <div key={phase.key} className={styles.agendaPhase}>
-                                        <div className={styles.agendaPhaseTitle}>{phase.title}</div>
-
-                                        {phase.items.length > 0 && (
-                                          <div
-                                            className={clsx(
-                                              styles.agendaPhaseItems,
-                                              styles.agendaPhaseItemsCards
-                                            )}
-                                          >
-                                            {phase.items.map((session) => {
-                                              const isKeynoteSession =
-                                                session.sessionType?.zh === "主旨报告" ||
-                                                session.sessionType?.en === "Keynote";
-                                              const isGuestRemarksSession =
-                                                session.sessionType?.zh === "嘉宾致辞" ||
-                                                session.sessionType?.en === "Guest Remarks";
-                                              const speakerPhotoSrc =
-                                                keynoteSpeakerPhotoBySessionId[session.id];
+                                    {mainForumPhases.map((phase) => {
+                                      const isLeaderRemarksPhase =
+                                        /领导致辞/.test(phase.title) || /^remarks$/i.test(phase.title);
+                                      const isGuestRemarksPhase =
+                                        phase.items.length > 0 &&
+                                        phase.items.every(
+                                          (session) =>
+                                            session.sessionType?.zh === "嘉宾致辞" ||
+                                            session.sessionType?.en === "Guest Remarks"
+                                        );
+                                      const guestRemarkBulletText = isGuestRemarksPhase
+                                        ? phase.items
+                                            .map((session) => {
                                               const sessionTitleText = getAgendaText(session.title, isZh).trim();
                                               const sessionSpeakerText = session.speakers
                                                 ? getAgendaText(session.speakers, isZh).trim()
                                                 : "";
+                                              if (sessionTitleText && sessionSpeakerText) {
+                                                return isZh
+                                                  ? `${sessionTitleText}，${sessionSpeakerText}`
+                                                  : `${sessionTitleText}, ${sessionSpeakerText}`;
+                                              }
+                                              return sessionTitleText || sessionSpeakerText;
+                                            })
+                                            .filter(Boolean)
+                                            .join("\n")
+                                        : "";
 
-                                              return (
+                                      return (
+                                        <div key={phase.key} className={styles.agendaPhase}>
+                                          <div className={styles.agendaPhaseTitle}>{phase.title}</div>
+
+                                          {isLeaderRemarksPhase && phase.lead
+                                            ? renderAgendaBulletItems(
+                                                phase.lead,
+                                                styles.agendaPhaseRemarkBullets
+                                              )
+                                            : phase.lead && (
+                                                <div className={styles.agendaPhaseLead}>{phase.lead}</div>
+                                              )}
+
+                                          {isGuestRemarksPhase && guestRemarkBulletText
+                                            ? renderAgendaBulletItems(
+                                                guestRemarkBulletText,
+                                                styles.agendaPhaseRemarkBullets,
+                                                { boldName: true, stackedNameRole: true }
+                                              )
+                                            : phase.items.length > 0 && (
                                                 <div
-                                                  key={session.id}
                                                   className={clsx(
-                                                    styles.agendaItem,
-                                                    styles.agendaKeynoteCard,
-                                                    isGuestRemarksSession && styles.agendaGuestRemarkCard,
-                                                    session.talkTitle && styles.agendaItemHasTalkTitle
+                                                    styles.agendaPhaseItems,
+                                                    styles.agendaPhaseItemsCards
                                                   )}
                                                 >
-                                                  <div
-                                                    className={styles.agendaKeynoteCardBottom}
-                                                    style={
-                                                      isKeynoteSession
-                                                        ? undefined
-                                                        : { gridTemplateColumns: "1fr", minHeight: "auto" }
-                                                    }
-                                                  >
-                                                    {isKeynoteSession && (
+                                                  {phase.items.map((session) => {
+                                                    const isKeynoteSession =
+                                                      session.sessionType?.zh === "主旨报告" ||
+                                                      session.sessionType?.en === "Keynote";
+                                                    const speakerPhotoSrc =
+                                                      keynoteSpeakerPhotoBySessionId[session.id];
+                                                    const sessionTitleText = getAgendaText(
+                                                      session.title,
+                                                      isZh
+                                                    ).trim();
+
+                                                    return (
                                                       <div
-                                                        className={styles.agendaKeynoteCardPhoto}
-                                                        aria-hidden="true"
+                                                        key={session.id}
+                                                        className={clsx(
+                                                          styles.agendaItem,
+                                                          styles.agendaKeynoteCard,
+                                                          session.talkTitle && styles.agendaItemHasTalkTitle
+                                                        )}
                                                       >
-                                                        <div className={styles.agendaSpeakerPhotoSlot}>
-                                                          {speakerPhotoSrc ? (
-                                                            <img
-                                                              src={speakerPhotoSrc}
-                                                              alt={getAgendaText(session.title, isZh)}
-                                                              loading="lazy"
-                                                            />
-                                                          ) : (
-                                                            <span
-                                                              className={
-                                                                styles.agendaSpeakerPhotoPlaceholder
-                                                              }
+                                                        <div
+                                                          className={styles.agendaKeynoteCardBottom}
+                                                          style={
+                                                            isKeynoteSession
+                                                              ? undefined
+                                                              : { gridTemplateColumns: "1fr", minHeight: "auto" }
+                                                          }
+                                                        >
+                                                          {isKeynoteSession && (
+                                                            <div
+                                                              className={styles.agendaKeynoteCardPhoto}
+                                                              aria-hidden="true"
                                                             >
-                                                              {isZh ? "待补" : "TBD"}
-                                                            </span>
+                                                              <div className={styles.agendaSpeakerPhotoSlot}>
+                                                                {speakerPhotoSrc ? (
+                                                                  <img
+                                                                    src={speakerPhotoSrc}
+                                                                    alt={getAgendaText(session.title, isZh)}
+                                                                    loading="lazy"
+                                                                  />
+                                                                ) : (
+                                                                  <span
+                                                                    className={
+                                                                      styles.agendaSpeakerPhotoPlaceholder
+                                                                    }
+                                                                  >
+                                                                    {isZh ? "待补" : "TBD"}
+                                                                  </span>
+                                                                )}
+                                                              </div>
+                                                            </div>
                                                           )}
-                                                        </div>
-                                                      </div>
-                                                    )}
-                                                  <div className={styles.agendaKeynoteCardMain}>
-                                                      {isGuestRemarksSession ? (
-                                                        <div className={styles.agendaGuestRemarkLine}>
-                                                          {sessionTitleText && (
-                                                            <span className={styles.agendaGuestRemarkName}>
+                                                          <div className={styles.agendaKeynoteCardMain}>
+                                                            <div className={styles.agendaTitle}>
                                                               {sessionTitleText}
-                                                            </span>
-                                                          )}
-                                                          {sessionSpeakerText && (
-                                                            <span className={styles.agendaGuestRemarkRole}>
-                                                              {sessionSpeakerText}
-                                                            </span>
-                                                          )}
+                                                            </div>
+                                                            {session.note && (
+                                                              <div className={styles.agendaNote}>
+                                                                {getAgendaText(session.note, isZh)}
+                                                              </div>
+                                                            )}
+                                                            {session.speakers && (
+                                                              <div className={styles.agendaNote}>
+                                                                {getAgendaText(session.speakers, isZh)}
+                                                              </div>
+                                                            )}
+                                                            {session.moderator && (
+                                                              <div className={styles.agendaNote}>
+                                                                {moderatorPrefix}
+                                                                {renderPersonNameWithBold(
+                                                                  getAgendaText(session.moderator, isZh)
+                                                                )}
+                                                              </div>
+                                                            )}
+                                                          </div>
                                                         </div>
-                                                      ) : (
-                                                        <div className={styles.agendaTitle}>
-                                                          {sessionTitleText}
-                                                        </div>
-                                                      )}
-                                                      {session.note && (
-                                                        <div className={styles.agendaNote}>
-                                                          {getAgendaText(session.note, isZh)}
-                                                        </div>
-                                                      )}
-                                                      {session.speakers && !isGuestRemarksSession && (
-                                                        <div className={styles.agendaNote}>
-                                                          {getAgendaText(session.speakers, isZh)}
-                                                        </div>
-                                                      )}
-                                                      {session.moderator && (
-                                                        <div className={styles.agendaNote}>
-                                                          {moderatorPrefix}
-                                                          {renderPersonNameWithBold(
-                                                            getAgendaText(session.moderator, isZh)
-                                                          )}
-                                                        </div>
-                                                      )}
-                                                    </div>
-                                                  </div>
-                                                  {session.talkTitle && (
-                                                    <div className={styles.agendaKeynoteCardTop}>
-                                                      {renderTalkTitle(session.talkTitle)}
-                                                    </div>
-                                                  )}
+                                                        {session.talkTitle && (
+                                                          <div className={styles.agendaKeynoteCardTop}>
+                                                            {renderTalkTitle(session.talkTitle)}
+                                                          </div>
+                                                        )}
+                                                      </div>
+                                                    );
+                                                  })}
                                                 </div>
-                                              );
-                                            })}
-                                          </div>
-                                        )}
-                                      </div>
-                                    ))}
+                                              )}
+                                        </div>
+                                      );
+                                    })}
                                   </div>
                                 ) : forceCardListView ? (
                                   <div className={styles.agendaPartsCard}>
@@ -2788,7 +2922,12 @@ export default function Forum(): ReactNode {
                                                     {sessionDisplayTitle && (
                                                       renderAgendaBulletItems(
                                                         sessionDisplayTitle,
-                                                        styles.agendaPartSpeakerTitle
+                                                        clsx(
+                                                          styles.agendaPartSpeakerTitle,
+                                                          emphasizeForumPeople &&
+                                                            styles.agendaPartPersonLine
+                                                        ),
+                                                        { boldName: emphasizeForumPeople }
                                                       )
                                                     )}
                                                     {session.speakers && (
@@ -2796,10 +2935,13 @@ export default function Forum(): ReactNode {
                                                         getAgendaText(session.speakers, isZh),
                                                         clsx(
                                                           styles.agendaPartSpeakerMeta,
+                                                          emphasizeForumPeople &&
+                                                            styles.agendaPartPersonLine,
                                                           styles.agendaPartMultiline,
                                                           isPanelSession &&
                                                             styles.agendaPartPanelSpeakers
-                                                        )
+                                                        ),
+                                                        { boldName: emphasizeForumPeople }
                                                       )
                                                     )}
                                                     {session.moderator && (
@@ -2810,8 +2952,11 @@ export default function Forum(): ReactNode {
                                                         )}`,
                                                         clsx(
                                                           styles.agendaPartSpeakerMeta,
+                                                          emphasizeForumPeople &&
+                                                            styles.agendaPartPersonLine,
                                                           styles.agendaPartMultiline
-                                                        )
+                                                        ),
+                                                        { boldName: emphasizeForumPeople }
                                                       )
                                                     )}
                                                   </div>
@@ -3012,18 +3157,38 @@ export default function Forum(): ReactNode {
           <section className={clsx(styles.section, styles.lightSection)}>
             <div className="container">
               <div className={styles.partnerGroupGrid}>
-                <div className={clsx(styles.card, styles.partnerGroupCard)}>
+                <div
+                  className={clsx(
+                    styles.card,
+                    styles.partnerGroupCard,
+                    styles.partnerGroupCoHostCard,
+                  )}
+                >
+                  <h2 className={styles.partnerGroupLabel}>
+                    <Translate id="forum.section.coOrganizers">联合主办单位</Translate>
+                  </h2>
+                  <div className={styles.partnerGroupBody}>
+                    <div className={clsx(styles.logoItem, styles.partnerLogoItem)}>
+                      <img
+                        src={organizerLogos[1].src}
+                        alt={organizerLogos[1].name}
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className={clsx(
+                    styles.card,
+                    styles.partnerGroupCard,
+                    styles.partnerGroupHostCard,
+                  )}
+                >
                   <h2 className={styles.partnerGroupLabel}>
                     <Translate id="forum.section.organizers">主办单位</Translate>
                   </h2>
                   <div className={styles.partnerGroupBody}>
-                    <div
-                      className={clsx(
-                        styles.logoItem,
-                        styles.partnerLogoItem,
-                        styles.partnerHostLogoItem,
-                      )}
-                    >
+                    <div className={clsx(styles.logoItem, styles.partnerLogoItem)}>
                       <img
                         src={organizerLogos[0].src}
                         alt={organizerLogos[0].name}
@@ -3032,21 +3197,21 @@ export default function Forum(): ReactNode {
                     </div>
                   </div>
                 </div>
-                <div className={clsx(styles.card, styles.partnerGroupCard)}>
+                <div
+                  className={clsx(
+                    styles.card,
+                    styles.partnerGroupCard,
+                    styles.partnerGroupDiamondCard,
+                  )}
+                >
                   <h2 className={styles.partnerGroupLabel}>
-                    <Translate id="forum.section.coOrganizers">联合主办单位</Translate>
+                    <Translate id="forum.section.diamondSponsor">钻石赞助商</Translate>
                   </h2>
                   <div className={styles.partnerGroupBody}>
-                    <div
-                      className={clsx(
-                        styles.logoItem,
-                        styles.partnerLogoItem,
-                        styles.partnerCoHostLogoItem,
-                      )}
-                    >
+                    <div className={clsx(styles.logoItem, styles.partnerLogoItem)}>
                       <img
-                        src={organizerLogos[1].src}
-                        alt={organizerLogos[1].name}
+                        src={organizerLogos[2].src}
+                        alt={organizerLogos[2].name}
                         loading="lazy"
                       />
                     </div>

@@ -4,7 +4,7 @@
  * work well for content-centric websites.
  */
  
- :root {
+:root {
   --ifm-color-primary: #5c246a;
   --ifm-color-primary-dark: #53205f;
   --ifm-color-primary-darker: #4e1f5a;
@@ -27,6 +27,14 @@
   --heading-font-size-h4: 1.2rem;
   --heading-font-size-h5: 1.1rem;
   --heading-font-size-h6: 1rem;
+  --site-scale-en-desktop: 0.9;
+}
+
+/* English copy runs longer, so slightly reduce the desktop type scale for that locale only. */
+@media screen and (min-width: 997px) {
+  html[lang="en"] {
+    font-size: calc(100% * var(--site-scale-en-desktop));
+  }
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */

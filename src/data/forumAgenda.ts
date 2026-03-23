@@ -92,7 +92,7 @@ export const masterAgendaSlots: MasterAgendaSlot[] = [
       zh: "碳足迹因子库建设专题研讨会",
       en: "Workshop on the Development of a LCA/PCF Database",
     },
-    status: "pending",
+    status: "updating",
   },
   {
     id: "d1-special-china-lca-am",
@@ -121,14 +121,14 @@ export const masterAgendaSlots: MasterAgendaSlot[] = [
     start: "17:00",
     end: "18:00",
     activityKey: "general-assembly",
-    shortTitle: { zh: "联盟年度大会（闭门）", en: "CFA General Assembly\n(Closed-Door)" },
+    shortTitle: { zh: "联盟年度大会（闭门）", en: "CFA" },
     status: "published",
   },
   {
     id: "d2-sub-power-pm",
     day: "day2",
     track: "subforums",
-    start: "13:30",
+    start: "14:00",
     end: "17:30",
     activityKey: "power-workshop",
     shortTitle: { zh: "电力", en: "Power" },
@@ -181,7 +181,7 @@ export const masterAgendaSlots: MasterAgendaSlot[] = [
     start: "14:00",
     end: "17:30",
     activityKey: "lca-audit",
-    shortTitle: { zh: "数据（英文）", en: "Data (EN)" },
+    shortTitle: { zh: "LCA与碳足迹数据（英文）", en: "LCA and PCF Data (EN)" },
     status: "published",
   },
 ];
@@ -209,6 +209,10 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         id: "mf-d2-open",
         day: "day2",
         title: { zh: "开场", en: "Opening" },
+        speakers: {
+          zh: "生态环境部\n江苏省发展与改革委员会\n江苏省生态环境厅\n南京市玄武区人民政府",
+          en: "Ministry of Ecology and Environment\nJiangsu Provincial Development and Reform Commission\nDepartment of Ecology and Environment of Jiangsu Province\nPeople's Government of Xuanwu District, Nanjing",
+        },
       },
       {
         id: "mf-d2-remarks",
@@ -231,12 +235,22 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         },
       },
       {
+        id: "mf-d2-remarks-bella",
+        day: "day2",
+        title: { zh: "张加贝", en: "Bella Zhang" },
+        sessionType: { zh: "嘉宾致辞", en: "Guest Remarks" },
+        speakers: {
+          zh: "远景全球可持续航空燃料战略负责人、远景红杉碳中和基金副总裁",
+          en: "Global Head of Sustainable Aviation Fuel Strategy, Envision; Vice President, Envision Sequoia Carbon Neutrality Fund",
+        },
+      },
+      {
         id: "mf-d2-keynote-llorenc",
         day: "day2",
         title: { zh: "Llorenç Milà i Canals", en: "Llorenc Milà i Canals" },
         talkTitle: {
           zh: "扩展 LCA 合作，应对全球共同挑战",
-          en: "Scaling up LCA Cooperation to address our Global Challenges",
+          en: "Scaling Up LCA Cooperation to Address Our Global Challenges",
         },
         sessionType: { zh: "主旨报告", en: "Keynote" },
         speakers: {
@@ -248,6 +262,10 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         id: "mf-d2-keynote-xu",
         day: "day2",
         title: { zh: "徐明", en: "Ming Xu" },
+        talkTitle: {
+          zh: "天工计划：从LCA数据库到数据基础设施",
+          en: "TianGong Initiative: From LCA Database to Data Infrastructure",
+        },
         sessionType: { zh: "主旨报告", en: "Keynote" },
         speakers: {
           zh: "清华大学碳中和讲席教授、环境学院副院长",
@@ -408,8 +426,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Yiming Sun, Senior Sustainability Advisor, ExxonMobil",
         },
         talkTitle: {
-          zh: "主题演讲四：（待定）",
-          en: "Thematic Talk 4: (TBD)",
+          zh: "主题演讲四：石化行业产品碳足迹方法论几点思考",
+          en: "Thematic Talk 4: Reflections on Product Carbon Footprint Methodology in the Petrochemical Industry",
         },
       },
       {
@@ -487,8 +505,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Lanting Wu, Lead Analyst, SAF Strategy and Commercialization, Envision Energy Co., Ltd.",
         },
         speakers: {
-          zh: "侯睿，空中客车可持续发展和SAF业务发展总监\n杨先其Kevin，陶氏亚太区数字化转型负责人\n持续邀请，敬请期待……",
-          en: "Rui Hou, Director of Sustainability and SAF Business Development, Airbus\nKevin Yang Xianqi, Head of Digital Transformation, Dow Asia Pacific",
+          zh: "孔姝，中碳众和市场部经理\n侯睿，空中客车可持续发展和SAF业务发展总监\n杨先其Kevin，陶氏亚太区数字化转型负责人",
+          en: "Shu Kong, Marketing Manager, Zhongtan Zhonghe\nRui Hou, Director of Sustainability and SAF Business Development, Airbus\nKevin Yang Xianqi, Head of Digital Transformation, Dow Asia Pacific",
         },
       },
       {
@@ -778,14 +796,18 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
   {
     activityKey: "lca-audit",
     groupKey: "sub-forums",
-    title: { zh: "数据（英文）", en: "Data (EN)" },
+    title: { zh: "LCA和碳足迹数据（英文）", en: "LCA and PCF Data (EN)" },
+    summaryLeadTop: {
+      zh: "召集人：\nAlessandro Manzardo，意大利帕多瓦大学土木、环境与建筑工程系（ICEA）环境质量研究中心（CESQA）教授",
+      en: "Convener:\nAlessandro Manzardo, Professor, Centre for Environmental Quality Studies (CESQA), Department of Civil, Environmental and Architectural Engineering (ICEA), University of Padua, Italy",
+    },
     summaryLead: {
-      zh: "主持人：\nAlessandro Manzardo 教授 | 意大利帕多瓦大学，土木、环境与建筑工程系（ICEA）环境质量研究中心（CESQA）",
-      en: "Moderator:\nProf. Alessandro Manzardo | Centre for Environmental Quality Studies (CESQA), Department of Civil, Environmental and Architectural Engineering (ICEA), University of Padua, Italy",
+      zh: "联合组织者：\nJunzhang Wu，意大利帕多瓦大学土木、环境与建筑工程系（ICEA）环境质量研究中心（CESQA）\nLuoqin Liu，意大利帕多瓦大学土木、环境与建筑工程系（ICEA）环境质量研究中心（CESQA）\nAlessandro Marson，意大利帕多瓦大学土木、环境与建筑工程系（ICEA）环境质量研究中心（CESQA）",
+      en: "Co-organizers:\nJunzhang Wu, Centre for Environmental Quality Studies (CESQA), Department of Civil, Environmental and Architectural Engineering (ICEA), University of Padua, Italy\nLuoqin Liu, Centre for Environmental Quality Studies (CESQA), Department of Civil, Environmental and Architectural Engineering (ICEA), University of Padua, Italy\nAlessandro Marson, Centre for Environmental Quality Studies (CESQA), Department of Civil, Environmental and Architectural Engineering (ICEA), University of Padua, Italy",
     },
     summary: {
-      zh: "生命周期评价与碳足迹数据 — 数据库、核证与数据质量的全球实践",
-      en: "LCA and Carbon Footprint Data — Global Practices on Databases, Verification, and Data Quality",
+      zh: "主题：生命周期评价与碳足迹数据 — 数据库、核证与数据质量的全球实践。本分论坛聚焦生命周期评价与碳足迹数据，旨在汇聚全球数据库建设与数据应用的最新实践，围绕数据获取与治理、方法学一致性、数据质量管理与不确定性表达，以及第三方核证/认证与质量控制等关键议题展开交流。议程将通过来自不同地区与机构的实践分享，介绍数据库建设、运维与服务应用经验，并围绕“如何提升数据的可用性、可信性与可比性”开展圆桌讨论，促进后续合作与资源对接。",
+      en: "Title: LCA & Carbon Footprint Data – Global Practices on Databases, Verification, and Data Quality. This sub-forum focuses on LCA and carbon footprint data, aiming to bring together the latest global practices in database development and data application. Discussions will cover key topics including data acquisition and governance, methodological consistency, data quality management and uncertainty representation, as well as third-party verification/certification and quality control. The agenda will include practical sharing sessions introducing experiences from different regions and institutions in database construction, operation and maintenance, and service applications, followed by a roundtable discussion on how to improve data usability, trustworthiness, and comparability to foster follow-on collaboration and matchmaking.",
     },
     dateLabel: { zh: "2026 年 3 月 26 日", en: "March 26, 2026" },
     timeRange: "Day 2 14:00-17:30",
@@ -806,7 +828,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         id: "data-keynote-ian",
         day: "day2",
         start: "14:10",
-        end: "14:30",
+        end: "14:25",
         sessionType: { zh: "主旨报告", en: "Keynote Speeches" },
         title: {
           zh: "Ian Vázquez Rowe，秘鲁天主教大学（PUCP）教授",
@@ -818,14 +840,29 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         },
       },
       {
+        id: "data-keynote-ramzy",
+        day: "day2",
+        start: "14:25",
+        end: "14:40",
+        sessionType: { zh: "主旨报告", en: "Keynote Speeches" },
+        title: {
+          zh: "Ramzy Kahhat，秘鲁天主教大学（PUCP）教授",
+          en: "Ramzy Kahhat, Professor, Pontifical Catholic University of Peru, Lima (PUCP)",
+        },
+        talkTitle: {
+          zh: "混合生命周期评价在秘鲁的实践与发展",
+          en: "Peru's Road to Hybrid LCA",
+        },
+      },
+      {
         id: "data-keynote-gui",
         day: "day2",
-        start: "14:30",
-        end: "14:50",
+        start: "14:40",
+        end: "14:55",
         sessionType: { zh: "主旨报告", en: "Keynote Speeches" },
         title: {
           zh: "桂志军，上海海科智慧数据科技有限公司 CEO",
-          en: "Zhijun Gui, CEO, Shanghai HiQ Smart Data Technology Co., Ltd.",
+          en: "Zhijun Gui, CEO, HiQ LCD",
         },
         talkTitle: {
           zh: "从设施到体系：中国LCI数据可信性的构建",
@@ -835,7 +872,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
       {
         id: "data-keynote-shabbir",
         day: "day2",
-        start: "14:50",
+        start: "14:55",
         end: "15:10",
         sessionType: { zh: "主旨报告", en: "Keynote Speeches" },
         title: {
@@ -851,7 +888,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         id: "data-keynote-thiago",
         day: "day2",
         start: "15:10",
-        end: "15:30",
+        end: "15:25",
         sessionType: { zh: "主旨报告", en: "Keynote Speeches" },
         title: {
           zh: "Thiago Oliveira Rodrigues，巴西科技信息研究所（IBICT）高级研究员",
@@ -859,29 +896,29 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         },
         talkTitle: {
           zh: "巴西LCA数据库建设",
-          en: "Building the LCA database in Brazil (Draft)",
+          en: "Building the LCA database in Brazil",
         },
       },
       {
         id: "data-keynote-jitti",
         day: "day2",
-        start: "15:30",
-        end: "15:50",
+        start: "15:25",
+        end: "15:40",
         sessionType: { zh: "主旨报告", en: "Keynote Speeches" },
         title: {
           zh: "Jitti Mungkalasiri，泰国国家科学技术发展署（NSTDA）可持续发展技术与信息研究所所长",
           en: "Jitti Mungkalasiri, Director, Sustainable Development Technology and Information Institute, National Science and Technology Development Agency (NSTDA), Thailand",
         },
         talkTitle: {
-          zh: "可信LCA数据基础设施构建（泰国）",
-          en: "Towards a trusted LCA data infrastructure in Thailand (Draft)",
+          zh: "泰国国家生命周期清单(LCI)数据库：从起步建设到系统整合",
+          en: "The Journey of Thailand’s National LCI Database: From Inception to Integration",
         },
       },
       {
         id: "data-keynote-jean",
         day: "day2",
-        start: "15:50",
-        end: "16:10",
+        start: "15:40",
+        end: "15:55",
         sessionType: { zh: "主旨报告", en: "Keynote Speeches" },
         title: {
           zh: "Jean Yang，通标标准技术服务有限公司SGS 能源低碳主任审核员",
@@ -895,7 +932,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
       {
         id: "data-break",
         day: "day2",
-        start: "16:10",
+        start: "15:55",
         end: "16:30",
         sessionType: { zh: "休息&茶歇", en: "Break & Tea" },
         title: { zh: "", en: "" },
@@ -1227,8 +1264,100 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     timeRange: "Day 1 10:45-12:15",
     venue: { zh: "专项活动会场 1", en: "Special Events Room 1" },
     language: "zh",
-    status: "pending",
-    sessions: [],
+    status: "updating",
+    sessions: [
+      {
+        id: "factordb-signin",
+        day: "day1",
+        start: "10:15",
+        end: "10:45",
+        sessionType: { zh: "签到与自由交流", en: "Check-in and Networking" },
+        title: { zh: "", en: "" },
+        talkTitle: { zh: "签到与自由交流", en: "Check-in and Networking" },
+      },
+      {
+        id: "factordb-remarks",
+        day: "day1",
+        start: "10:45",
+        end: "10:55",
+        sessionType: { zh: "嘉宾致辞", en: "Guest Remarks" },
+        title: {
+          zh: "徐华清，国家应对气候变化战略研究和国际合作中心原主任\n王国伦，中化能源科技有限公司总经理",
+          en: "Huaqing Xu, Former Director, National Center for Climate Change Strategy and International Cooperation\nGuolun Wang, General Manager, Sinochem Energy Technology Co., Ltd.",
+        },
+        talkTitle: { zh: "嘉宾致辞", en: "Guest Remarks" },
+      },
+      {
+        id: "factordb-sharing-xu",
+        day: "day1",
+        start: "10:55",
+        end: "11:15",
+        sessionType: { zh: "专题分享", en: "Thematic Sharing" },
+        title: {
+          zh: "徐明，清华大学环境学院副院长、碳中和讲席教授",
+          en: "Ming Xu, Chair Professor of Carbon Neutrality and Deputy Dean, School of Environment, Tsinghua University",
+        },
+        talkTitle: {
+          zh: "《产品碳足迹因子数据库建设工作指引》研探",
+          en: "Discussion on the Guidelines for the Construction of Product Carbon Footprint Factor Databases",
+        },
+      },
+      {
+        id: "factordb-sharing-lai",
+        day: "day1",
+        start: "11:15",
+        end: "11:30",
+        sessionType: { zh: "专题分享", en: "Thematic Sharing" },
+        title: {
+          zh: "赖力，江苏省发改委资环处处长",
+          en: "Li Lai, Director, Department of Resource Conservation and Environmental Protection, Jiangsu Development and Reform Commission",
+        },
+        talkTitle: {
+          zh: "江苏省碳足迹公共服务平台和重点行业碳足迹因子介绍",
+          en: "Introduction to Jiangsu's Carbon Footprint Public Service Platform and Carbon Footprint Factors for Key Industries",
+        },
+      },
+      {
+        id: "factordb-sharing-lin",
+        day: "day1",
+        start: "11:30",
+        end: "11:45",
+        sessionType: { zh: "专题分享", en: "Thematic Sharing" },
+        title: {
+          zh: "林丽，TUV莱茵可持续发展总监",
+          en: "Li Lin, Sustainability Director, TUV Rheinland",
+        },
+        talkTitle: {
+          zh: "碳足迹因子库：认证视角下的挑战与机遇",
+          en: "Carbon Footprint Factor Databases: Challenges and Opportunities from a Certification Perspective",
+        },
+      },
+      {
+        id: "factordb-roundtable",
+        day: "day1",
+        start: "11:45",
+        end: "12:15",
+        sessionType: { zh: "圆桌讨论", en: "Roundtable Discussion" },
+        title: { zh: "", en: "" },
+        talkTitle: {
+          zh: "主题：构建可信、可互操作的产品碳足迹因子数据库",
+          en: "Topic: Building a Trusted and Interoperable Product Carbon Footprint Factor Database",
+        },
+        speakers: {
+          zh: "冯相昭，工信部赛迪研究院研究员\n陈远翔，云南省生态环境科学研究院低碳技术研究中心正高级工程师\n武振华，中化能科碳资产运营有限公司副总经理\n陈曦，国检集团环境与健康事业部总经理助理\n李鹏，天职国际会计师事务所咨询合伙人/可持续发展合伙人",
+          en: "Xiangzhao Feng, Researcher, CCID Research Institute, Ministry of Industry and Information Technology\nYuanxiang Chen, Professorate Senior Engineer, Low-Carbon Technology Research Center, Yunnan Academy of Eco-Environmental Sciences\nZhenhua Wu, Deputy General Manager, Sinochem Energy Technology Carbon Asset Operations Co., Ltd.\nXi Chen, Assistant General Manager, Environment and Health Business Division, CTC Group\nPeng Li, Consulting Partner / Sustainability Partner, BDO China Shu Lun Pan Certified Public Accountants LLP",
+        },
+      },
+      {
+        id: "factordb-closing",
+        day: "day1",
+        sessionType: { zh: "会议总结", en: "Closing" },
+        title: {
+          zh: "卢佳新，中国环境科学学会技术推广部主任兼碳足迹专委会副秘书长",
+          en: "Jiaxin Lu, Director, Technology Promotion Department, Chinese Society for Environmental Sciences; Deputy Secretary-General, Carbon Footprint Committee",
+        },
+      },
+    ],
   },
   {
     activityKey: "china-lca",
@@ -1253,35 +1382,29 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     status: "updating",
     sessions: [
       {
-        id: "china-lca-remarks",
-        day: "day1",
-        start: "09:00",
-        end: "09:05",
-        sessionType: { zh: "会议开场", en: "Opening" },
-        title: { zh: "待定", en: "TBD" },
-        talkTitle: { zh: "致辞", en: "Remarks" },
-      },
-      {
         id: "china-lca-report-1",
         day: "day1",
-        start: "09:05",
-        end: "09:30",
+        start: "09:00",
+        end: "09:25",
         sessionType: { zh: "报告", en: "Report" },
         title: {
           zh: "田亚峻 ｜ 中国科学院青岛生物能源与过程研究所 泛能源大数据与战略研究中心主任 研究员",
-          en: "Yajun Tian\nQingdao Institute of Bioenergy and Bioprocess Technology, Chinese Academy of Sciences\nDirector/Researcher, Pan-Energy Big Data and Strategy Research Center",
+          en: "Yajun Tian, Director/Researcher, Pan-Energy Big Data and Strategy Research Center, Qingdao Institute of Bioenergy and Bioprocess Technology, Chinese Academy of Sciences",
         },
-        talkTitle: { zh: "报告1", en: "Report 1" },
+        talkTitle: {
+          zh: "GIS-LCA的优势及其发展趋势",
+          en: "Advantages of GIS-LCA and Its Development Trends",
+        },
       },
       {
         id: "china-lca-report-2",
         day: "day1",
-        start: "09:30",
-        end: "09:45",
+        start: "09:25",
+        end: "09:40",
         sessionType: { zh: "报告", en: "Report" },
         title: {
           zh: "谢明辉 ｜ 中国环境科学研究院 环境管理研究中心主任 研究员",
-          en: "Minghui Xie\nChinese Research Academy of Environmental Sciences\nDirector/Researcher, Environmental Management Research Center",
+          en: "Minghui Xie, Director/Researcher, Environmental Management Research Center, Chinese Research Academy of Environmental Sciences",
         },
         talkTitle: {
           zh: "中国光伏行业LCA研究与思考",
@@ -1291,12 +1414,12 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
       {
         id: "china-lca-report-3",
         day: "day1",
-        start: "09:45",
-        end: "10:00",
+        start: "09:40",
+        end: "09:55",
         sessionType: { zh: "报告", en: "Report" },
         title: {
           zh: "刘宇 ｜ 北京工业大学 教授",
-          en: "Yu Liu\nProfessor, Beijing University of Technology",
+          en: "Yu Liu, Professor, Beijing University of Technology",
         },
         talkTitle: {
           zh: "材料生命周期评价研究及应用",
@@ -1306,12 +1429,12 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
       {
         id: "china-lca-report-4",
         day: "day1",
-        start: "10:00",
-        end: "10:15",
+        start: "09:55",
+        end: "10:10",
         sessionType: { zh: "报告", en: "Report" },
         title: {
           zh: "吕彬 ｜ 中国科学院生态环境研究中心 副研究员",
-          en: "Bin Lv\nAssociate Researcher, Research Center for Eco-Environmental Sciences, Chinese Academy of Sciences",
+          en: "Bin Lv, Associate Researcher, Research Center for Eco-Environmental Sciences, Chinese Academy of Sciences",
         },
         talkTitle: {
           zh: "面向决策支撑的生命周期评价：应用实践与趋势思考",
@@ -1321,17 +1444,26 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
       {
         id: "china-lca-report-5",
         day: "day1",
-        start: "10:15",
-        end: "10:30",
+        start: "10:10",
+        end: "10:25",
         sessionType: { zh: "报告", en: "Report" },
         title: {
           zh: "张哲 ｜ 生态环境部环境规划院 助理研究员",
-          en: "Zhe Zhang\nAssistant Researcher, Chinese Academy of Environmental Planning, Ministry of Ecology and Environment",
+          en: "Zhe Zhang, Assistant Researcher, Chinese Academy of Environmental Planning, Ministry of Ecology and Environment",
         },
         talkTitle: {
           zh: "产品碳足迹发展与CPCD 数据库建设实践",
           en: "Product Carbon Footprint Development and CPCD Database Construction Practices",
         },
+      },
+      {
+        id: "china-lca-closing",
+        day: "day1",
+        start: "10:25",
+        end: "10:30",
+        sessionType: { zh: "会议总结", en: "Closing" },
+        title: { zh: "", en: "" },
+        talkTitle: { zh: "总结致辞", en: "Closing Remarks" },
       },
     ],
   },
@@ -1352,7 +1484,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
       en: "This sub-forum focuses on power-system decarbonization and power carbon-footprint accounting, with opening remarks, keynote speeches, roundtables, and closing remarks. Topics cover global trends, China strategy, methods and standards, and enterprise practice.",
     },
     dateLabel: { zh: "2026 年 3 月 26 日", en: "March 26, 2026" },
-    timeRange: "Day 2 13:30-17:30",
+    timeRange: "Day 2 14:00-17:30",
     venue: { zh: "分论坛会场（待确认）", en: "Sub-forum Venue (TBC)" },
     language: "zh",
     status: "pending",
@@ -1373,8 +1505,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         end: "14:05",
         sessionType: { zh: "主旨发言环节（14:00-16:00）", en: "Keynote Session (14:00-16:00)" },
         title: {
-          zh: "国网江苏电力公司代表",
-          en: "Representative of State Grid Jiangsu Electric Power Company",
+          zh: "戴锋，国网江苏省电力有限公司副总经理",
+          en: "Feng Dai, Deputy General Manager, State Grid Jiangsu Electric Power Co., Ltd.",
         },
         talkTitle: { zh: "开场致辞", en: "Opening Remarks" },
       },
@@ -1541,7 +1673,10 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         start: "17:25",
         end: "17:30",
         sessionType: { zh: "会议总结", en: "Closing" },
-        title: { zh: "", en: "" },
+        title: {
+          zh: "徐明，清华大学碳中和讲席教授、环境学院副院长",
+          en: "Ming Xu, Chair Professor of Carbon Neutrality and Deputy Dean, School of Environment, Tsinghua University",
+        },
         talkTitle: { zh: "结束致辞", en: "Closing Remarks" },
       },
     ],

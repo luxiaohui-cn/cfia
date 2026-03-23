@@ -914,7 +914,7 @@
     "message": "March 24-26, 2026 · Nanjing, Jiangsu, China"
   },
   "forum.modules.generalAssembly.title": {
-    "message": "CFA General Assembly"
+    "message": "CFA Assembly"
   },
   "forum.modules.generalAssembly.note": {
     "message": "Review annual work and set plans."
@@ -948,6 +948,9 @@
   },
   "forum.section.coOrganizers": {
     "message": "Co-organized by"
+  },
+  "forum.section.diamondSponsor": {
+    "message": "Diamond Sponsor"
   },
   "forum.section.supportingOrgs": {
     "message": "Supported by"
@@ -1040,10 +1043,10 @@
     "message": "Deep decarbonization across electronics and appliance supply chains."
   },
   "forum.agenda.subForums.audit": {
-    "message": "Data (EN)"
+    "message": "Data Sub-forum"
   },
   "forum.agenda.subForums.audit.lead": {
-    "message": "Bringing together global LCA and carbon footprint data practices to discuss key topics such as data quality."
+    "message": "Focused on global practices in databases, verification, and data quality."
   },
   "forum.agenda.tag.subForum": {
     "message": "Sub-forum"
