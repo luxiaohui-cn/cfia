@@ -545,6 +545,14 @@ const people: {
     image: "img/tg-forum/people/JingjieZ-zdl.jpg",
   },
   {
+    key: "jingxuan-hui",
+    nameEn: "Jingxuan Hui",
+    nameZh: "惠婧璇",
+    titleZh: <>国家发展改革委能源研究所环境中心副主任</>,
+    titleEn: <>Deputy Director, Environmental Center, Energy Research Institute, NDRC</>,
+    image: "img/tg-forum/people/JingxuanH-nrdc.jpg",
+  },
+  {
     key: "haixiao-zhang",
     nameEn: "Haixiao Zhang",
     nameZh: "张海孝",
@@ -729,6 +737,31 @@ const supportInstitutionLogos: {
       message: "清华苏州环境创新研究院（RIET）",
     }),
     src: "img/tg-forum/partner-logo/riet.png",
+  },
+  {
+    key: "cesqa",
+    name: "CESQA",
+    src: "img/tg-forum/partner-logo/cesqa.png",
+  },
+  {
+    key: "ibict",
+    name: "IBICT",
+    src: "img/tg-forum/partner-logo/ibict.png",
+  },
+  {
+    key: "icea",
+    name: "ICEA",
+    src: "img/tg-forum/partner-logo/ICEA.png",
+  },
+  {
+    key: "lis",
+    name: "LIS",
+    src: "img/tg-forum/partner-logo/lis.png",
+  },
+  {
+    key: "pucp",
+    name: "PUCP",
+    src: "img/tg-forum/partner-logo/PUCP.png",
   },
 ];
 

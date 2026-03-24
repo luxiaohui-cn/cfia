@@ -98,7 +98,7 @@ export const masterAgendaSlots: MasterAgendaSlot[] = [
     end: "12:00",
     activityKey: "unep-workshop",
     shortTitle: {
-      zh: "UNEP 全球 LCA 平台研讨会（邀请制）",
+      zh: "UNEP 全球 LCA 平台研讨会\n（邀请制）",
       en: "UNEP Global LCA Platform Workshop\n(Invitation Only)",
     },
     status: "updating",
@@ -143,7 +143,7 @@ export const masterAgendaSlots: MasterAgendaSlot[] = [
     start: "17:00",
     end: "18:00",
     activityKey: "general-assembly",
-    shortTitle: { zh: "联盟年度大会（闭门）", en: "CFA General Assembly\n(Close Door)" },
+    shortTitle: { zh: "联盟年度大会\n（闭门）", en: "CFA General Assembly\n(Close Door)" },
     status: "published",
   },
   {
@@ -650,8 +650,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Topic 1: Supply Chain Collaboration in Batteries under Carbon-Compliance Pressure; Topic 2: Prospects for Battery Decarbonization Driven by Technology and Circularity",
         },
         speakers: {
-          zh: "孟大海 | 蔚来产品环保及可持续团队负责人，总监\n汪子阜 | 隆基绿能可持续发展专家\n刘程曦 | 欣旺达动力 ESG 负责人\n霍江贝 | 华友钴业可持续发展中心碳排负责人\n王胜彬 | 尚太科技博士工程师\n张楠 | 碳信科技（北京）有限公司项目总监",
-          en: "Dahai Meng | Head and Director, Product Environmental Protection and Sustainability Team, NIO\nZifu Wang | Sustainability Specialist, LONGi Green Energy\nChengxi Liu | ESG Lead, Sunwoda Power\nJiangbei Huo | Carbon Lead, Sustainability Center, Huayou Cobalt\nShengbin Wang | Doctoral Engineer, Shantai Technology\nNan Zhang | Project Director, Tanxin Technology (Beijing) Co., Ltd.",
+          zh: "孟大海 | 蔚来产品环保及可持续团队负责人，总监\n汪子阜 | 隆基绿能可持续发展专家\n刘程曦 | 欣旺达动力 ESG 负责人\n霍江贝 | 华友钴业可持续发展中心碳排负责人\n陈朋 | 尚太科技可持续发展与ESG负责人\n张楠 | 碳信科技（北京）有限公司项目总监",
+          en: "Dahai Meng | Head and Director, Product Environmental Protection and Sustainability Team, NIO\nZifu Wang | Sustainability Specialist, LONGi Green Energy\nChengxi Liu | ESG Lead, Sunwoda Power\nJiangbei Huo | Carbon Lead, Sustainability Center, Huayou Cobalt\nPeng Chen | Sustainability and ESG Lead, Shantai Technology\nNan Zhang | Project Director, Tanxin Technology (Beijing) Co., Ltd.",
         },
       },
       {
@@ -745,11 +745,11 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         sessionType: { zh: "主旨报告", en: "Keynote Speeches" },
         title: {
           zh: "闫韬 | 西门子（中国）有限公司 网络与信息安全部负责人；西碳迹业务负责人",
-          en: "Tao Yan | Head of Network and Information Security Department; Business Lead, XiTanJi, Siemens (China) Co., Ltd.",
+          en: "Tao Yan | Head of Network and Information Security Department; Business Lead, SiTANJI, Siemens (China) Co., Ltd.",
         },
         talkTitle: {
           zh: "绿色供应链与碳透明度：西门子西碳迹助力电子电器行业低碳转型",
-          en: "Green Supply Chains and Carbon Transparency: Siemens XiTanJi Enabling Low-Carbon Transition in Electronics and Electrical Industries",
+          en: "Green Supply Chains and Carbon Transparency: Siemens SiTANJI Enabling Low-Carbon Transition in Electronics and Electrical Industries",
         },
       },
       {
@@ -1390,8 +1390,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
       en: "Conveners:\nYajun Tian, Director, Pan-Energy Big Data and Strategy Research Center, Qingdao Institute of Bioenergy and Bioprocess Technology, Chinese Academy of Sciences\nNing Yu, Party Secretary and Professor, Chongqing University of Technology",
     },
     summaryLead: {
-      zh: "主持人：\n俞宁 ｜ 重庆理工大学 党委书记/教授",
-      en: "Moderator:\nNing Yu, Party Secretary and Professor, Chongqing University of Technology",
+      zh: "主持人：\n俞宁 ｜ 重庆理工大学车辆工程学院 党委书记/教授",
+      en: "Moderator:\nNing Yu, Party Secretary / Professor, School of Vehicle Engineering, Chongqing University of Technology",
     },
     summary: {
       zh: "活动主题：符合国情 · 全球普适：中国的LCA",
@@ -1404,14 +1404,29 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     status: "updating",
     sessions: [
       {
-        id: "china-lca-report-1",
+        id: "china-lca-remarks",
         day: "day1",
         start: "09:00",
-        end: "09:25",
-        sessionType: { zh: "报告", en: "Report" },
+        end: "09:05",
+        sessionType: { zh: "致辞", en: "Opening Remarks" },
         title: {
-          zh: "田亚峻 ｜ 中国科学院青岛生物能源与过程研究所 泛能源大数据与战略研究中心主任 研究员",
-          en: "Yajun Tian, Director/Researcher, Pan-Energy Big Data and Strategy Research Center, Qingdao Institute of Bioenergy and Bioprocess Technology, Chinese Academy of Sciences",
+          zh: "朱俊武 ｜ 南京理工大学 党委常委/副校长",
+          en: "Junwu Zhu, Member of University Party Standing Committee / Vice President, Nanjing University of Science and Technology",
+        },
+        talkTitle: {
+          zh: "致辞",
+          en: "Opening Remarks",
+        },
+      },
+      {
+        id: "china-lca-report-1",
+        day: "day1",
+        start: "09:05",
+        end: "09:30",
+        sessionType: { zh: "主旨报告", en: "Keynote" },
+        title: {
+          zh: "田亚峻 ｜ 中国科学院青岛生物能源与过程研究所 泛能源大数据与战略研究中心 主任/研究员",
+          en: "Yajun Tian, Director / Researcher, Pan-Energy Big Data and Strategy Research Center, Qingdao Institute of Bioenergy and Bioprocess Technology, Chinese Academy of Sciences",
         },
         talkTitle: {
           zh: "GIS-LCA的优势及其发展趋势",
@@ -1421,12 +1436,12 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
       {
         id: "china-lca-report-2",
         day: "day1",
-        start: "09:25",
-        end: "09:40",
-        sessionType: { zh: "报告", en: "Report" },
+        start: "09:30",
+        end: "09:45",
+        sessionType: { zh: "主旨报告", en: "Keynote" },
         title: {
-          zh: "谢明辉 ｜ 中国环境科学研究院 环境管理研究中心主任 研究员",
-          en: "Minghui Xie, Director/Researcher, Environmental Management Research Center, Chinese Research Academy of Environmental Sciences",
+          zh: "谢明辉 ｜ 中国环境科学研究院环境管理研究中心 主任/研究员",
+          en: "Minghui Xie, Director / Researcher, Environmental Management Research Center, Chinese Research Academy of Environmental Sciences",
         },
         talkTitle: {
           zh: "中国光伏行业LCA研究与思考",
@@ -1436,9 +1451,9 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
       {
         id: "china-lca-report-3",
         day: "day1",
-        start: "09:40",
-        end: "09:55",
-        sessionType: { zh: "报告", en: "Report" },
+        start: "09:45",
+        end: "10:00",
+        sessionType: { zh: "主旨报告", en: "Keynote" },
         title: {
           zh: "刘宇 ｜ 北京工业大学 教授",
           en: "Yu Liu, Professor, Beijing University of Technology",
@@ -1451,9 +1466,9 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
       {
         id: "china-lca-report-4",
         day: "day1",
-        start: "09:55",
-        end: "10:10",
-        sessionType: { zh: "报告", en: "Report" },
+        start: "10:00",
+        end: "10:15",
+        sessionType: { zh: "主旨报告", en: "Keynote" },
         title: {
           zh: "吕彬 ｜ 中国科学院生态环境研究中心 副研究员",
           en: "Bin Lv, Associate Researcher, Research Center for Eco-Environmental Sciences, Chinese Academy of Sciences",
@@ -1466,9 +1481,9 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
       {
         id: "china-lca-report-5",
         day: "day1",
-        start: "10:10",
-        end: "10:25",
-        sessionType: { zh: "报告", en: "Report" },
+        start: "10:15",
+        end: "10:30",
+        sessionType: { zh: "主旨报告", en: "Keynote" },
         title: {
           zh: "张哲 ｜ 生态环境部环境规划院 助理研究员",
           en: "Zhe Zhang, Assistant Researcher, Chinese Academy of Environmental Planning, Ministry of Ecology and Environment",
@@ -1477,15 +1492,6 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           zh: "产品碳足迹发展与CPCD 数据库建设实践",
           en: "Product Carbon Footprint Development and CPCD Database Construction Practices",
         },
-      },
-      {
-        id: "china-lca-closing",
-        day: "day1",
-        start: "10:25",
-        end: "10:30",
-        sessionType: { zh: "会议总结", en: "Closing" },
-        title: { zh: "", en: "" },
-        talkTitle: { zh: "总结致辞", en: "Closing Remarks" },
       },
     ],
   },
@@ -1558,8 +1564,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Qimin Chai, Director, Strategic Planning Department, National Center for Climate Change Strategy and International Cooperation",
         },
         talkTitle: {
-          zh: "2035年国家自主贡献及“十五五”规划实施路径研究",
-          en: "Pathways for 2035 NDC and the 15th Five-Year Plan Implementation",
+          zh: "\"十五五\"电力脱碳转型:新形势、新目标与新政策",
+          en: "Power Decarbonization Transition in the 15th Five-Year Plan: New Context, New Goals, and New Policies",
         },
       },
       {
