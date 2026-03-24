@@ -173,7 +173,7 @@ export const masterAgendaSlots: MasterAgendaSlot[] = [
     start: "13:30",
     end: "17:30",
     activityKey: "petrochemical",
-    shortTitle: { zh: "石化化工", en: "Petrochemicals" },
+    shortTitle: { zh: "石化化工", en: "Petrochemical & Chemical" },
     status: "updating",
   },
   {
@@ -360,7 +360,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
   {
     activityKey: "petrochemical",
     groupKey: "sub-forums",
-    title: { zh: "石化化工", en: "Petrochemicals" },
+    title: { zh: "石化化工", en: "Petrochemical & Chemical" },
     summaryLeadTop: {
       zh: "主办：\n中国化工节能技术协会",
       en: "Organizer:\nChina Chemical Energy Conservation Technology Association",
@@ -507,8 +507,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
           en: "Yongliang Li, Secretary-General, China Chemical Energy Conservation Technology Association; Director, Department of Science & Technology and Equipment, China Petroleum and Chemical Industry Federation",
         },
         speakers: {
-          zh: "田涛，中国石化节能技术服务中心/中石化节能技术服务有限公司技术副总监/教授级高级工程师\n于波，中国海油集团公司质量健康安全环保部副处长\n朱建民，辽宁奥克化学股份有限公司董事长\n武振华，中化能科碳资产运营有限公司副总经理\n杨光星，中国碳排放权注册登记结算有限责任公司副总经理\n谢修平，中标合信（北京）认证有限公司副总经理\n赵俊峰，鼎力可持续数字科技公司气候变化总监",
-          en: "Tao Tian, Deputy Technical Director, Sinopec Energy Conservation Technology Service Center / Sinopec Energy Conservation Technology Service Co., Ltd.; Professorate Senior Engineer\nBo Yu, Deputy Division Director, Quality, Health, Safety and Environmental Protection Department, CNOOC Group\nJianmin Zhu, Chairman, Liaoning Oxiranchem Inc.\nZhenhua Wu, Deputy General Manager, Sinochem Energy Technology Carbon Asset Operations Co., Ltd.\nGuangxing Yang, Deputy General Manager, China Emissions Exchange Registry and Clearing Co., Ltd.\nXiuping Xie, Deputy General Manager, Zhongbiao Hexin (Beijing) Certification Co., Ltd.\nJunfeng Zhao, Climate Change Director, Dingli Sustainable Digital Technology",
+          zh: "田涛，中国石化节能技术服务中心/中石化节能技术服务有限公司技术副总监/教授级高级工程师\n于波，中国海油集团公司质量健康安全环保部副处长\n朱建民，辽宁奥克化学股份有限公司董事长\n杨光星，中国碳排放权注册登记结算有限责任公司副总经理\n谢修平，中标合信（北京）认证有限公司副总经理\n赵俊峰，鼎力可持续数字科技公司气候变化总监",
+          en: "Tao Tian, Deputy Technical Director, Sinopec Energy Conservation Technology Service Center / Sinopec Energy Conservation Technology Service Co., Ltd.; Professorate Senior Engineer\nBo Yu, Deputy Division Director, Quality, Health, Safety and Environmental Protection Department, CNOOC Group\nJianmin Zhu, Chairman, Liaoning Oxiranchem Inc.\nGuangxing Yang, Deputy General Manager, China Emissions Exchange Registry and Clearing Co., Ltd.\nXiuping Xie, Deputy General Manager, Zhongbiao Hexin (Beijing) Certification Co., Ltd.\nJunfeng Zhao, Climate Change Director, Dingli Sustainable Digital Technology",
         },
       },
       {
@@ -520,7 +520,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         title: { zh: "", en: "" },
         talkTitle: {
           zh: "圆桌论坛二\n议题：国际减排框架下可持续燃料碳足迹核算、标准互认与环境属性流转闭环机制讨论",
-          en: "Roundtable Forum II\nTopic: Discussion on Sustainable-Fuel Carbon-Footprint Accounting, Mutual Recognition of Standards, and Closed-Loop Mechanisms for Environmental-Attribute Circulation under International Emission-Reduction Frameworks",
+          en: "Roundtable Forum II\nTopic: Discussion on Carbon Footprint Accounting, Standard Mutual Recognition, and Closed-Loop Mechanism for Environmental Attribute Transfer of Sustainable Fuels under the International Emission Reduction Framework",
         },
         moderator: {
           zh: "吴兰亭，远景能源有限公司 SAF 战略与商业化主任分析师",
@@ -528,7 +528,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         },
         speakers: {
           zh: "孔姝，中碳众和市场部经理\n侯睿，空中客车可持续发展和SAF业务发展总监\n杨先其Kevin，陶氏亚太区数字化转型负责人",
-          en: "Shu Kong, Marketing Manager, Zhongtan Zhonghe\nRui Hou, Director of Sustainability and SAF Business Development, Airbus\nKevin Yang Xianqi, Head of Digital Transformation, Dow Asia Pacific",
+          en: "Shu Kong, Marketing Manager, Ecological Quality Certification\nRui Hou, Director of Sustainability and SAF Business Development, Airbus\nKevin Yang Xianqi, Head of Digital Transformation, Dow Asia Pacific",
         },
       },
       {
