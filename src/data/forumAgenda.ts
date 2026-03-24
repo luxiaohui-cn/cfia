@@ -60,6 +60,28 @@ export type ActivityAgendaDetail = {
   sessions: ActivitySession[];
 };
 
+const agendaVenues: Record<string, AgendaText> = {
+  purplePalaceBallroom: { zh: "紫金厅", en: "Purple Palace Ballroom" },
+  purplePalacePresenceChamber: {
+    zh: "会见厅",
+    en: "Purple Palace Presence Chamber",
+  },
+  purplePalaceBallroomCd: { zh: "紫金CD厅", en: "Purple Palace Ballroom C&D" },
+  lagerstroemiaIndicaBallroomA: {
+    zh: "紫薇A厅",
+    en: "Lagerstroemia Indica Ballroom A",
+  },
+  lagerstroemiaIndicaBallroomB: {
+    zh: "紫薇B厅",
+    en: "Lagerstroemia Indica Ballroom B",
+  },
+  goldenThread: { zh: "红杉厅", en: "Golden Thread" },
+  internationalConvertionHall: {
+    zh: "国际报告厅",
+    en: "International Convertion Hall",
+  },
+};
+
 export const agendaTrackOrder: AgendaTrackKey[] = [
   "main",
   "subforums",
@@ -121,7 +143,7 @@ export const masterAgendaSlots: MasterAgendaSlot[] = [
     start: "17:00",
     end: "18:00",
     activityKey: "general-assembly",
-    shortTitle: { zh: "联盟年度大会（闭门）", en: "CFA" },
+    shortTitle: { zh: "联盟年度大会（闭门）", en: "CFA General Assembly\n(Close Door)" },
     status: "published",
   },
   {
@@ -197,7 +219,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     },
     dateLabel: { zh: "2026 年 3 月 26 日", en: "March 26, 2026" },
     timeRange: "Day 2 09:00-12:00",
-    venue: { zh: "主会场（紫金厅）", en: "Main Hall (Zijin Hall)" },
+    venue: agendaVenues.purplePalaceBallroom,
     language: "bilingual",
     status: "published",
     hostName: {
@@ -210,8 +232,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
         day: "day2",
         title: { zh: "开场", en: "Opening" },
         speakers: {
-          zh: "生态环境部\n江苏省发展与改革委员会\n江苏省生态环境厅\n南京市玄武区人民政府",
-          en: "Ministry of Ecology and Environment\nJiangsu Provincial Development and Reform Commission\nDepartment of Ecology and Environment of Jiangsu Province\nPeople's Government of Xuanwu District, Nanjing",
+          zh: "生态环境部\n江苏省发展与改革委员会\n江苏省生态环境厅\n南京市玄武区",
+          en: "Ministry of Ecology and Environment\nJiangsu Provincial Development and Reform Commission\nDepartment of Ecology and Environment of Jiangsu Province\nXuanwu District, Nanjing",
         },
       },
       {
@@ -353,7 +375,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     },
     dateLabel: { zh: "2026 年 3 月 26 日", en: "March 26, 2026" },
     timeRange: "Day 2 13:30-17:30",
-    venue: { zh: "分会场 A", en: "Breakout Room A" },
+    venue: agendaVenues.purplePalaceBallroomCd,
     language: "zh",
     status: "updating",
     sessions: [
@@ -534,7 +556,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     },
     dateLabel: { zh: "2026 年 3 月 26 日", en: "March 26, 2026" },
     timeRange: "Day 2 14:00-17:30",
-    venue: { zh: "分会场 B", en: "Breakout Room B" },
+    venue: agendaVenues.lagerstroemiaIndicaBallroomA,
     language: "zh",
     status: "published",
     sessions: [
@@ -657,7 +679,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     },
     dateLabel: { zh: "2026 年 3 月 26 日", en: "March 26, 2026" },
     timeRange: "Day 2 14:00-17:30",
-    venue: { zh: "分会场 C", en: "Breakout Room C" },
+    venue: agendaVenues.purplePalacePresenceChamber,
     language: "zh",
     status: "published",
     sessions: [
@@ -811,7 +833,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     },
     dateLabel: { zh: "2026 年 3 月 26 日", en: "March 26, 2026" },
     timeRange: "Day 2 14:00-17:30",
-    venue: { zh: "国际专场（英文）", en: "International Track (EN)" },
+    venue: agendaVenues.lagerstroemiaIndicaBallroomB,
     language: "en",
     status: "published",
     sessions: [
@@ -972,7 +994,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     summary: { zh: "围绕 LCA 工具链、数据库生态、开发接口与协作实践展开。", en: "Focus on tooling, database ecosystems, APIs, and collaborative development practices." },
     dateLabel: { zh: "2026 年 3 月 25 日", en: "March 25, 2026" },
     timeRange: "Day 1 13:30-17:50",
-    venue: { zh: "开发者专场", en: "Developer Track" },
+    venue: agendaVenues.internationalConvertionHall,
     language: "bilingual",
     status: "updating",
     sessions: [
@@ -1218,7 +1240,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     hideSummaryUpdateNote: true,
     dateLabel: { zh: "2026 年 3 月 25 日", en: "March 25, 2026" },
     timeRange: "Day 1 17:00-18:00",
-    venue: { zh: "专项活动会场 1", en: "Special Events Room 1" },
+    venue: agendaVenues.purplePalacePresenceChamber,
     language: "zh",
     status: "published",
     hostName: { zh: "碳足迹产业技术创新联盟（CFA）", en: "Carbon Footprint Alliance (CFA)" },
@@ -1242,7 +1264,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     },
     dateLabel: { zh: "2026 年 3 月 25 日", en: "March 25, 2026" },
     timeRange: "Day 1 09:00-12:00",
-    venue: { zh: "专项活动会场 2", en: "Special Events Room 2" },
+    venue: agendaVenues.goldenThread,
     language: "en",
     status: "updating",
     hostName: { zh: "UNEP 生命周期倡议", en: "UNEP Life Cycle Initiative" },
@@ -1262,7 +1284,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     },
     dateLabel: { zh: "2026 年 3 月 25 日", en: "March 25, 2026" },
     timeRange: "Day 1 10:45-12:15",
-    venue: { zh: "专项活动会场 1", en: "Special Events Room 1" },
+    venue: agendaVenues.lagerstroemiaIndicaBallroomA,
     language: "zh",
     status: "updating",
     sessions: [
@@ -1377,7 +1399,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     },
     dateLabel: { zh: "2026 年 3 月 25 日", en: "March 25, 2026" },
     timeRange: "Day 1 09:00-10:30",
-    venue: { zh: "专项活动会场 1", en: "Special Events Room 1" },
+    venue: agendaVenues.purplePalacePresenceChamber,
     language: "zh",
     status: "updating",
     sessions: [
@@ -1485,7 +1507,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     },
     dateLabel: { zh: "2026 年 3 月 26 日", en: "March 26, 2026" },
     timeRange: "Day 2 14:00-17:30",
-    venue: { zh: "分论坛会场（待确认）", en: "Sub-forum Venue (TBC)" },
+    venue: agendaVenues.internationalConvertionHall,
     language: "zh",
     status: "pending",
     sessions: [

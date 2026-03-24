@@ -1444,6 +1444,26 @@ export default function Forum(): ReactNode {
     );
   };
 
+  const renderVenueTag = (
+    venue?: AgendaText,
+    options?: { className?: string; showLabel?: boolean }
+  ): ReactNode => {
+    if (!venue) {
+      return null;
+    }
+
+    const showLabel = options?.showLabel ?? true;
+
+    return (
+      <span className={clsx(styles.agendaVenueTag, options?.className)}>
+        {showLabel && (
+          <span className={styles.agendaVenueTagLabel}>{isZh ? "会场" : "Venue"}</span>
+        )}
+        <span className={styles.agendaVenueTagValue}>{getAgendaText(venue, isZh)}</span>
+      </span>
+    );
+  };
+
   const isHostOrModeratorLabel = (label: string): boolean => {
     const normalized = label.trim().toLowerCase();
     return (
@@ -1984,7 +2004,7 @@ export default function Forum(): ReactNode {
     const calendarDays = buildDayCalendarLayouts(masterAgendaSlots);
     const dayLayoutMap = new Map(calendarDays.map((layout) => [layout.day, layout]));
     const boardStartMinutes = 8 * 60;
-    const boardEndMinutes = 18 * 60;
+    const boardEndMinutes = 19 * 60;
     const prepRegistrationStartMinutes = 14 * 60;
     const day2RegistrationEndMinutes = 9 * 60;
     const boardTimeRows = Math.max(
@@ -2266,12 +2286,18 @@ export default function Forum(): ReactNode {
                             onClick={() => openAndScrollToActivity(placement.slot.activityKey)}
                           >
                             <div className={styles.masterTimelineItemTop}>
-                              <span className={styles.masterPeriodTrackTag}>
-                                {getTrackLabel(placement.slot.track)}
-                              </span>
+                              {renderVenueTag(getActivityDetailByKey(placement.slot.activityKey)?.venue, {
+                                className: styles.masterTimelineVenueTag,
+                                showLabel: false,
+                              })}
                             </div>
                             <div className={styles.masterTimelineItemTitle}>
                               {getAgendaText(placement.slot.shortTitle, isZh)}
+                            </div>
+                            <div className={styles.masterTimelineItemFooter}>
+                              <span className={styles.masterPeriodTrackTag}>
+                                {getTrackLabel(placement.slot.track)}
+                              </span>
                             </div>
                           </button>
                         </div>
@@ -2405,12 +2431,18 @@ export default function Forum(): ReactNode {
                               onClick={() => openAndScrollToActivity(slot.activityKey)}
                             >
                               <div className={styles.masterTimelineItemTop}>
-                                <span className={styles.masterPeriodTrackTag}>
-                                  {getTrackLabel(slot.track)}
-                                </span>
+                                {renderVenueTag(getActivityDetailByKey(slot.activityKey)?.venue, {
+                                  className: styles.masterTimelineVenueTag,
+                                  showLabel: false,
+                                })}
                               </div>
                               <div className={styles.masterTimelineItemTitle}>
                                 {getAgendaText(slot.shortTitle, isZh)}
+                              </div>
+                              <div className={styles.masterTimelineItemFooter}>
+                                <span className={styles.masterPeriodTrackTag}>
+                                  {getTrackLabel(slot.track)}
+                                </span>
                               </div>
                             </button>
                           ))}
@@ -2520,13 +2552,15 @@ export default function Forum(): ReactNode {
                         onClick={() => toggleActivityExpanded(detail.activityKey)}
                       >
                         <div className={styles.agendaPanelToggleMain}>
-                          <div
-                            className={clsx(
-                              styles.agendaPanelToggleTitle,
-                              !showGroupHeader && styles.agendaPanelToggleTitlePromoted
-                            )}
-                          >
-                            {getAgendaText(detail.title, isZh)}
+                          <div className={styles.agendaPanelToggleHeadline}>
+                            <div
+                              className={clsx(
+                                styles.agendaPanelToggleTitle,
+                                !showGroupHeader && styles.agendaPanelToggleTitlePromoted
+                              )}
+                            >
+                              {getAgendaText(detail.title, isZh)}
+                            </div>
                           </div>
                           {renderStatusPill(detail.status)}
                         </div>
@@ -2541,6 +2575,10 @@ export default function Forum(): ReactNode {
                               {compactTimeRange || detail.timeRange}
                             </span>
                           )}
+                          {renderVenueTag(detail.venue, {
+                            className: styles.agendaPanelVenueTag,
+                            showLabel: false,
+                          })}
                         </div>
                         <span
                           className={clsx(

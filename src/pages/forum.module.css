@@ -591,6 +591,9 @@
   --agenda-event-accent: #7b8794;
   --agenda-tag-bg: rgba(100, 116, 139, 0.1);
   --agenda-tag-color: #475569;
+  --agenda-venue-tag-bg: rgba(100, 116, 139, 0.26);
+  --agenda-venue-tag-border: rgba(100, 116, 139, 0.4);
+  --agenda-venue-tag-color: #344150;
   position: relative;
   z-index: 1;
   align-self: stretch;
@@ -629,7 +632,7 @@
   color: var(--agenda-tag-color);
   padding: 0.12rem 0.5rem;
   font-size: 0.72rem;
-  border-radius: 999px;
+  border-radius: 8px;
   position: relative;
   z-index: 1;
 }
@@ -656,10 +659,12 @@
 .masterCalendarEvent .masterTimelineItemTop {
   width: 100%;
   justify-content: flex-start;
-  align-items: center;
-  gap: 0.35rem;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.24rem 0.3rem;
   min-height: 0;
-  margin-bottom: 0.12rem;
+  margin-bottom: 0.18rem;
 }
 
 .masterCalendarEvent .masterGanttItemRange {
@@ -957,6 +962,9 @@
   --agenda-event-accent: #4f8fd4;
   --agenda-tag-bg: rgba(79, 143, 212, 0.12);
   --agenda-tag-color: #2d5f96;
+  --agenda-venue-tag-bg: rgba(79, 143, 212, 0.3);
+  --agenda-venue-tag-border: rgba(79, 143, 212, 0.48);
+  --agenda-venue-tag-color: #204f82;
 }
 
 .masterTrackSubforums {
@@ -965,6 +973,9 @@
   --agenda-event-accent: #4eab76;
   --agenda-tag-bg: rgba(78, 171, 118, 0.12);
   --agenda-tag-color: #2f6f4a;
+  --agenda-venue-tag-bg: rgba(78, 171, 118, 0.3);
+  --agenda-venue-tag-border: rgba(78, 171, 118, 0.46);
+  --agenda-venue-tag-color: #235b3a;
 }
 
 .masterTrackSpecial {
@@ -973,6 +984,9 @@
   --agenda-event-accent: #8b6ad6;
   --agenda-tag-bg: rgba(139, 106, 214, 0.13);
   --agenda-tag-color: #5d44a4;
+  --agenda-venue-tag-bg: rgba(139, 106, 214, 0.3);
+  --agenda-venue-tag-border: rgba(139, 106, 214, 0.46);
+  --agenda-venue-tag-color: #4d2f94;
 }
 
 .masterTrackDeveloper {
@@ -981,6 +995,9 @@
   --agenda-event-accent: #d88a2f;
   --agenda-tag-bg: rgba(216, 138, 47, 0.14);
   --agenda-tag-color: #925818;
+  --agenda-venue-tag-bg: rgba(216, 138, 47, 0.32);
+  --agenda-venue-tag-border: rgba(216, 138, 47, 0.48);
+  --agenda-venue-tag-color: #7a460d;
 }
 
 .masterTimelineMobile {
@@ -1210,6 +1227,7 @@
   background: #f8fbff;
   padding: 0.75rem 0.8rem;
   display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
   gap: 0.45rem;
   color: inherit;
 }
@@ -1223,10 +1241,11 @@
 
 .masterTimelineItemTop {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
   flex-wrap: wrap;
+  gap: 0.3rem 0.34rem;
 }
 
 .masterTimelineItemTitle {
@@ -1235,6 +1254,56 @@
   line-height: 1.35;
   color: #1f2f3d;
   white-space: pre-line;
+}
+
+.masterTimelineItemFooter {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.34rem;
+  margin-top: auto;
+}
+
+.agendaVenueTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid #0f5b99;
+  background: #0f5b99;
+  color: #f8fbff;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.24;
+}
+
+.agendaVenueTagLabel {
+  color: rgba(248, 251, 255, 0.84);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.agendaVenueTagValue {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.masterTimelineVenueTag {
+  align-self: flex-start;
+  max-width: 100%;
+  border: 1px solid #0f5b99;
+  background: #0f5b99;
+  color: #f8fbff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.12rem 0.5rem;
+  border-radius: 8px;
+  gap: 0;
+  box-shadow: none;
 }
 
 .masterSlotMobile {
@@ -1365,11 +1434,33 @@
   flex-wrap: wrap;
 }
 
+.agendaPanelToggleHeadline {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem 0.55rem;
+  flex-wrap: wrap;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
 .agendaPanelToggleTitle {
   font-size: 1.05rem;
   font-weight: 700;
   color: #1a2a33;
   white-space: pre-line;
+}
+
+.agendaPanelVenueTag {
+  flex: 0 1 auto;
+  align-self: center;
+  border-color: #e6edf5;
+  background: #f8fafc;
+  color: #4f6072;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .agendaPanelToggleTitlePromoted {
@@ -3422,6 +3513,12 @@
   color: #c8d4e4;
 }
 
+[data-theme='dark'] .agendaPanelVenueTag {
+  background: rgba(216, 227, 242, 0.05);
+  border-color: rgba(216, 227, 242, 0.16);
+  color: #c8d4e4;
+}
+
 [data-theme='dark'] .personCard .personName {
   color: #1a2a33;
 }
@@ -3568,6 +3665,22 @@
   --forum-agenda-board-bg: var(--ifm-background-surface-color);
 }
 
+[data-theme='dark'] .agendaVenueTag {
+  border-color: #5fa4f0;
+  background: #2f7ed6;
+  color: #f8fbff;
+}
+
+[data-theme='dark'] .agendaVenueTagLabel {
+  color: rgba(248, 251, 255, 0.84);
+}
+
+[data-theme='dark'] .masterTimelineVenueTag {
+  border-color: #5fa4f0;
+  background: #2f7ed6;
+  color: #f8fbff;
+}
+
 [data-theme='dark'] .masterPeriodTitle,
 [data-theme='dark'] .masterPeriodItemTitle,
 [data-theme='dark'] .masterCalendarDayTitle,
@@ -3659,21 +3772,33 @@
 [data-theme='dark'] .masterTrackMain {
   background: #2c4561;
   border-color: #4a7aa9;
+  --agenda-venue-tag-bg: rgba(108, 170, 238, 0.34);
+  --agenda-venue-tag-border: rgba(143, 192, 245, 0.52);
+  --agenda-venue-tag-color: #deecff;
 }
 
 [data-theme='dark'] .masterTrackSubforums {
   background: #2f4a3a;
   border-color: #4b8a65;
+  --agenda-venue-tag-bg: rgba(109, 208, 145, 0.34);
+  --agenda-venue-tag-border: rgba(135, 224, 167, 0.5);
+  --agenda-venue-tag-color: #e0f8e7;
 }
 
 [data-theme='dark'] .masterTrackSpecial {
   background: #473f60;
   border-color: #7764b0;
+  --agenda-venue-tag-bg: rgba(177, 149, 240, 0.34);
+  --agenda-venue-tag-border: rgba(197, 172, 247, 0.52);
+  --agenda-venue-tag-color: #efe6ff;
 }
 
 [data-theme='dark'] .masterTrackDeveloper {
   background: #5a452b;
   border-color: #b67a38;
+  --agenda-venue-tag-bg: rgba(237, 176, 96, 0.36);
+  --agenda-venue-tag-border: rgba(245, 198, 136, 0.54);
+  --agenda-venue-tag-color: #fff0d9;
 }
 
 [data-theme='dark'] .masterTimelinePeriod {
@@ -4190,6 +4315,22 @@
     padding: 0.14rem 0.44rem;
   }
 
+  .agendaPanelVenueTag {
+    font-size: 0.69rem;
+    padding: 0.14rem 0.44rem;
+  }
+
+  .agendaVenueTag {
+    font-size: 0.69rem;
+    padding: 0.14rem 0.44rem;
+    gap: 0.24rem;
+  }
+
+  .masterTimelineVenueTag {
+    font-size: 0.62rem;
+    border-radius: 7px;
+  }
+
   .agendaPanelBody {
     padding: 0.85rem 0.9rem 0.95rem;
     gap: 0.78rem;
@@ -4400,7 +4541,8 @@
   .masterCalendarStackedMobile .masterCalendarEvent .masterPeriodTrackTag {
     padding: 0.08rem 0.3rem;
     font-size: 0.58rem;
-    margin-bottom: 0.26rem;
+    border-radius: 7px;
+    margin-bottom: 0;
   }
 
   .masterCalendarStackedMobile .masterCalendarEvent .masterTimelineItemTop {
@@ -4924,6 +5066,22 @@
   .agendaPanelMetaTag {
     padding: 0.12rem 0.4rem;
     font-size: 0.64rem;
+  }
+
+  .agendaPanelVenueTag {
+    padding: 0.12rem 0.4rem;
+    font-size: 0.64rem;
+  }
+
+  .agendaVenueTag {
+    padding: 0.12rem 0.4rem;
+    font-size: 0.64rem;
+    gap: 0.22rem;
+  }
+
+  .masterTimelineVenueTag {
+    font-size: 0.58rem;
+    border-radius: 6px;
   }
 
   .agendaPanelBody {
@@ -5472,7 +5630,8 @@
   .masterCalendarStackedMobile .masterCalendarEvent .masterPeriodTrackTag {
     padding: 0.05rem 0.22rem;
     font-size: 0.55rem;
-    margin-bottom: 0.24rem;
+    border-radius: 6px;
+    margin-bottom: 0;
   }
 
   .masterCalendarStackedMobile .masterCalendarEvent .masterTimelineItemTop {
