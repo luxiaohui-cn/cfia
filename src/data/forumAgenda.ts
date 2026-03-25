@@ -587,8 +587,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
       {
         id: "bat-keynote-eve",
         day: "day2",
-        start: "14:30",
-        end: "14:50",
+        start: "14:50",
+        end: "15:10",
         sessionType: { zh: "主旨报告", en: "Keynote Speeches" },
         talkTitle: {
           zh: "电池全生命周期碳管理实践",
@@ -602,8 +602,8 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
       {
         id: "bat-keynote-tianqi",
         day: "day2",
-        start: "14:50",
-        end: "15:10",
+        start: "14:30",
+        end: "14:50",
         sessionType: { zh: "主旨报告", en: "Keynote Speeches" },
         talkTitle: {
           zh: "可持续发展指引下的企业碳管理",
@@ -994,7 +994,7 @@ export const activityAgendaDetails: ActivityAgendaDetail[] = [
     summary: { zh: "围绕 LCA 工具链、数据库生态、开发接口与协作实践展开。", en: "Focus on tooling, database ecosystems, APIs, and collaborative development practices." },
     dateLabel: { zh: "2026 年 3 月 25 日", en: "March 25, 2026" },
     timeRange: "Day 1 13:30-17:50",
-    venue: agendaVenues.internationalConvertionHall,
+    venue: agendaVenues.purplePalaceBallroom,
     language: "bilingual",
     status: "updating",
     sessions: [
